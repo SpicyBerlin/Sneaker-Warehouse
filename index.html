@@ -1,0 +1,2033 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Warehouse">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="theme-color" content="#17140f">
+<meta name="robots" content="noindex">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAABhUlEQVR42u3bwQmAIABA0YzuXQJboC0avy1aoLboHIUJiVC8d01T5GOnQhz6Bu60jgBxIA7EgTgQB+JAHIgDcSAOEAfiQByIA3EgDsSBOBAH4gBxIA7EgTgQB+JAHIgDcSAOEAfiQByIA3EgDsSBOBAH4kAcIA7ydXWW2fY98XSM8XHWdcz7d6ZHltpJzqz83ebv2c2BOBAH4kAciANxIA4QB+JAHIgDcSAOxIE4EAfiAHEgDsSBOBAH4kAciANxIA7EAeJAHIgDcSAOxIE4EAfiQBwgDsSBOBAH4kAciANxIA7EAeJAHIgDcSAOxIE4EAfiQByIA8SBOBAH4kAciANxIA7+K8Shdwq4ORAH4kAciANxIA7EgTgQB5x0dZZZZ0dd2LS4OfBZQRyIA3EgDsQB4kAciANxIA7EgTho/PGGmwNxgDgQB+JAHIgDcSAOxIE4EAfiAHEgDsSBOBAH4kAciANxIA4QB+JAHIgDcSAOxIE4EAfiAHEgDsSBOBAH4kAcfNIBWFccGLPWUhsAAAAASUVORK5CYII=">
+<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAABhUlEQVR42u3bwQmAIABA0YzuXQJboC0avy1aoLboHIUJiVC8d01T5GOnQhz6Bu60jgBxIA7EgTgQB+JAHIgDcSAOEAfiQByIA3EgDsSBOBAH4gBxIA7EgTgQB+JAHIgDcSAOEAfiQByIA3EgDsSBOBAH4kAcIA7ydXWW2fY98XSM8XHWdcz7d6ZHltpJzqz83ebv2c2BOBAH4kAciANxIA4QB+JAHIgDcSAOxIE4EAfiAHEgDsSBOBAH4kAciANxIA7EAeJAHIgDcSAOxIE4EAfiQBwgDsSBOBAH4kAciANxIA7EAeJAHIgDcSAOxIE4EAfiQByIA8SBOBAH4kAciANxIA7+K8Shdwq4ORAH4kAciANxIA7EgTgQB5x0dZZZZ0dd2LS4OfBZQRyIA3EgDsQB4kAciANxIA7EgTho/PGGmwNxgDgQB+JAHIgDcSAOxIE4EAfiAHEgDsSBOBAH4kAciANxIA4QB+JAHIgDcSAOxIE4EAfiAHEgDsSBOBAH4kAcfNIBWFccGLPWUhsAAAAASUVORK5CYII=">
+<title>Sneaker Warehouse</title>
+<style>
+:root{
+  --bg:#f2efe8;--card:#fffdf8;--ink:#17140f;--mute:#6d675c;--line:#d8d2c4;--soft:#ebe6da;
+  --acc:#f2500f;--acc-ink:#fff;--ok:#1c8048;--warn:#a86c00;--bad:#c12a2a;
+  --ok-bg:#e2f3e8;--warn-bg:#fbf0d4;--bad-bg:#fbe3e0;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --r:12px;--tab:62px;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#12110f;--card:#1c1a16;--ink:#f1ece2;--mute:#9b9488;--line:#37322a;--soft:#26231e;
+  --acc:#ff6a2b;--acc-ink:#160c05;--ok:#4cc27f;--warn:#e3b04a;--bad:#f07a70;
+  --ok-bg:#173524;--warn-bg:#3a2f12;--bad-bg:#421d1a;
+}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  padding-bottom:calc(var(--tab) + env(safe-area-inset-bottom));-webkit-tap-highlight-color:transparent}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+h1,h2,h3{margin:0}
+h2{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin:22px 0 8px;display:flex;align-items:center;gap:8px}
+h2 .n{background:var(--ink);color:var(--bg);border-radius:99px;padding:1px 8px;font-size:12px;letter-spacing:0}
+h2 .sp{flex:1}
+a{color:inherit}
+.top{position:sticky;top:0;z-index:20;background:var(--ink);color:var(--bg);display:flex;align-items:center;gap:8px;
+  padding:calc(8px + env(safe-area-inset-top)) 14px 8px}
+.logo{font-weight:800;letter-spacing:.14em;font-size:14px;flex:1;white-space:nowrap}
+.logo b{color:var(--acc);font-weight:800}
+.top button{background:none;border:1px solid transparent;color:inherit;border-radius:8px;padding:6px 8px;display:flex;align-items:center;gap:6px;font-size:12px}
+.top button:active{border-color:currentColor}
+.top svg,.tabs svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+#syncBtn.busy svg{animation:spin 1s linear infinite}
+#syncBtn.err{color:var(--bad)}
+@keyframes spin{to{transform:rotate(360deg)}}
+main{max-width:920px;margin:0 auto;padding:14px 14px 30px}
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--card);border-top:1px solid var(--line);display:flex;
+  padding-bottom:env(safe-area-inset-bottom)}
+.tabs button{flex:1;background:none;border:0;height:var(--tab);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+  font-size:11px;color:var(--mute);position:relative}
+.tabs button.on{color:var(--ink);font-weight:700}
+.tabs button.on::before{content:"";position:absolute;top:0;left:22%;right:22%;height:3px;background:var(--acc)}
+.tabs .dot{position:absolute;top:8px;left:calc(50% + 8px);background:var(--acc);color:var(--acc-ink);border-radius:99px;font-size:10px;min-width:16px;height:16px;line-height:16px;padding:0 4px;font-weight:700}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px;margin:10px 0}
+.card.tight{padding:10px 12px}
+.btn{border:1px solid var(--ink);background:var(--card);border-radius:10px;padding:11px 14px;font-weight:650;min-height:44px;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none}
+.btn.pri{background:var(--acc);border-color:var(--acc);color:var(--acc-ink)}
+.btn.dark{background:var(--ink);color:var(--bg)}
+.btn.ghost{border-color:var(--line);font-weight:500}
+.btn.bad{border-color:var(--bad);color:var(--bad)}
+.btn.sm{min-height:34px;padding:5px 10px;font-size:14px;border-radius:8px}
+.btn.wide{width:100%}
+.btn:disabled{opacity:.45}
+.btn:active{transform:translateY(1px)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.row.nw{flex-wrap:nowrap}
+.row>.grow{flex:1;min-width:0}
+.cap{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.cap .btn{flex-direction:column;gap:4px;padding:14px 8px;font-size:15px}
+.cap .btn small{font-weight:400;font-size:12px;opacity:.8}
+.cap .btn.pri{grid-column:1/-1;font-size:18px;padding:20px 8px}
+.cap svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.note{font-size:13px;color:var(--mute)}
+.banner{border-radius:var(--r);padding:10px 12px;margin:10px 0;font-size:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.banner.warn{background:var(--warn-bg);color:var(--ink);border:1px solid var(--warn)}
+.banner.bad{background:var(--bad-bg);border:1px solid var(--bad)}
+.banner.info{background:var(--soft);border:1px solid var(--line)}
+.banner .grow{flex:1;min-width:180px}
+
+/* Formular */
+.form{display:grid;grid-template-columns:repeat(4,1fr);gap:10px 8px}
+.fld{grid-column:span 4;min-width:0}
+.fld.h{grid-column:span 2}.fld.q{grid-column:span 1}
+.fld>label:not(.chk),.lbl{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin-bottom:3px}
+.fld .req{color:var(--acc)}
+input[type=text],input[type=date],input[type=search],input[type=password],input[type=url],select,textarea{
+  width:100%;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:9px 10px;min-height:42px;font-size:16px;-webkit-appearance:none;appearance:none}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--acc);outline-offset:-1px}
+input.mono{font-family:var(--mono);letter-spacing:.04em;text-transform:uppercase}
+input.miss{border-color:var(--bad);background:var(--bad-bg)}
+textarea{min-height:64px;resize:vertical}
+.chk{display:flex;align-items:center;gap:8px;min-height:42px;font-size:14px}
+.chk input{width:22px;height:22px;accent-color:var(--acc);flex:none}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:5px}
+.chip{border:1px solid var(--line);background:var(--card);border-radius:99px;padding:4px 10px;font-size:13px;min-height:30px}
+.chip.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+details.card>summary{cursor:pointer;font-weight:650;list-style:none;display:flex;gap:8px;align-items:center}
+details.card>summary::-webkit-details-marker{display:none}
+details.card>summary::after{content:"+";margin-left:auto;font-size:20px;color:var(--mute)}
+details.card[open]>summary::after{content:"–"}
+details.card[open]>summary{margin-bottom:12px}
+
+/* Listen */
+.it{display:flex;gap:10px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:10px;margin:8px 0;width:100%;text-align:left}
+.it .th{width:54px;height:54px;border-radius:8px;background:var(--soft);flex:none;object-fit:cover;display:flex;align-items:center;justify-content:center;color:var(--mute);font-size:11px;overflow:hidden}
+.it .th img{width:100%;height:100%;object-fit:cover}
+.it .mid{flex:1;min-width:0}
+.it .t{display:block;font-weight:650;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.it .s{font-size:13px;color:var(--mute);display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:2px}
+.it .r{text-align:right;font-variant-numeric:tabular-nums;font-weight:650;white-space:nowrap}
+.it .r small{display:block;font-weight:400;color:var(--mute);font-size:12px}
+.sku{font-family:var(--mono);font-size:12.5px;background:var(--ink);color:var(--bg);padding:1px 6px;border-radius:4px;letter-spacing:.03em;white-space:nowrap}
+.sz{font-family:var(--mono);font-size:12.5px;border:1px solid var(--ink);padding:0 5px;border-radius:4px;white-space:nowrap}
+.tag{font-size:12px;border-radius:99px;padding:1px 8px;white-space:nowrap;border:1px solid var(--line)}
+.tag.ok{background:var(--ok-bg);color:var(--ok);border-color:transparent}
+.tag.warn{background:var(--warn-bg);color:var(--warn);border-color:transparent}
+.tag.bad{background:var(--bad-bg);color:var(--bad);border-color:transparent}
+.tag.busy::before{content:"";display:inline-block;width:9px;height:9px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;margin-right:5px;animation:spin .8s linear infinite;vertical-align:-1px}
+.lv{display:inline-flex;gap:2px;vertical-align:middle}
+.lv i{width:6px;height:10px;border-radius:2px;background:var(--line)}
+.lv.l1 i:nth-child(-n+1){background:var(--warn)}
+.lv.l2 i:nth-child(-n+2){background:var(--ok)}
+.lv.l3 i{background:var(--ok)}
+.empty{text-align:center;color:var(--mute);padding:28px 10px;border:1px dashed var(--line);border-radius:var(--r);font-size:14px}
+.filters{display:flex;gap:6px;overflow-x:auto;padding:2px 0 6px;-webkit-overflow-scrolling:touch}
+.filters .chip{flex:none}
+.filters select{width:auto;min-height:30px;padding:3px 26px 3px 10px;font-size:13px;border-radius:99px;background:var(--card)}
+
+/* Prüfkette */
+.ev{list-style:none;margin:0;padding:0;font-size:14px}
+.ev li{display:flex;gap:8px;padding:5px 0;border-bottom:1px dashed var(--line)}
+.ev li:last-child{border:0}
+.ev .i{flex:none;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff;margin-top:1px}
+.ev .y .i{background:var(--ok)}.ev .n .i{background:var(--bad)}.ev .u .i{background:var(--mute)}
+.verd{display:flex;gap:10px;align-items:center;font-weight:700;margin-bottom:6px}
+.verd .pill{padding:3px 10px;border-radius:99px;font-size:13px}
+.v3 .pill,.v2 .pill{background:var(--ok);color:#fff}.v1 .pill{background:var(--warn);color:#fff}.v0 .pill{background:var(--bad);color:#fff}
+.shot{width:100%;max-height:230px;object-fit:contain;background:#000;border-radius:10px;display:block}
+.cand{display:flex;gap:10px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:8px;margin:6px 0;width:100%;text-align:left;background:var(--card)}
+.cand.on{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc) inset}
+.cand img{width:64px;height:48px;object-fit:contain;background:#fff;border-radius:6px;flex:none}
+
+/* Sheets */
+#sheets .sheet{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.5);display:flex;align-items:flex-end;justify-content:center}
+.sheet-card{background:var(--bg);width:100%;max-width:720px;max-height:94vh;max-height:94dvh;border-radius:18px 18px 0 0;display:flex;flex-direction:column;overflow:hidden}
+@media(min-width:760px){#sheets .sheet{align-items:center}.sheet-card{border-radius:18px;max-height:90dvh}}
+.sheet-card>header{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--line);background:var(--card)}
+.sheet-card>header h3{flex:1;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sheet-card>header .x{border:0;background:var(--soft);width:34px;height:34px;border-radius:50%;font-size:18px;line-height:1}
+.sheet-body{padding:14px;overflow:auto;-webkit-overflow-scrolling:touch;flex:1}
+.sheet-card>footer{padding:10px 14px calc(10px + env(safe-area-inset-bottom));border-top:1px solid var(--line);background:var(--card);display:flex;gap:8px}
+.sheet-card>footer .btn{flex:1}
+.sheet.dlg{align-items:center!important;padding:20px}
+.sheet.dlg .sheet-card{border-radius:16px;max-width:420px}
+.zoom{position:fixed;inset:0;z-index:80;background:#000;overflow:auto;-webkit-overflow-scrolling:touch}
+.zoom img{width:220%;max-width:none;display:block}
+.zoom button{position:fixed;top:calc(10px + env(safe-area-inset-top));right:12px;z-index:2;border:0;border-radius:50%;width:40px;height:40px;font-size:20px;background:#fff;color:#000}
+#toasts{position:fixed;left:0;right:0;bottom:calc(var(--tab) + 12px + env(safe-area-inset-bottom));z-index:90;display:flex;flex-direction:column;align-items:center;gap:6px;pointer-events:none;padding:0 12px}
+.toast{background:var(--ink);color:var(--bg);padding:9px 14px;border-radius:10px;font-size:14px;max-width:520px;box-shadow:0 6px 20px rgba(0,0,0,.25)}
+.toast.bad{background:var(--bad);color:#fff}.toast.ok{background:var(--ok);color:#fff}
+
+/* Dashboard */
+.kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+@media(min-width:700px){.kpis{grid-template-columns:repeat(4,1fr)}}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:11px 12px}
+.kpi .l{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.kpi .v{font-size:21px;font-weight:750;font-variant-numeric:tabular-nums;margin-top:2px}
+.kpi .d{font-size:12px;color:var(--mute)}
+.pos{color:var(--ok)}.neg{color:var(--bad)}
+.bars{display:flex;align-items:flex-end;gap:6px;height:120px;margin-top:6px}
+.bars .b{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;font-size:11px;color:var(--mute);gap:3px}
+.bars .b i{display:block;width:100%;background:var(--ok);border-radius:4px 4px 0 0;min-height:2px}
+.bars .b i.neg{background:var(--bad)}
+.bars .b span{font-variant-numeric:tabular-nums;color:var(--ink);font-size:11px}
+.hb{display:grid;grid-template-columns:minmax(70px,30%) 1fr auto;gap:8px;align-items:center;font-size:13px;margin:5px 0}
+.hb .tr{height:10px;background:var(--soft);border-radius:99px;overflow:hidden}
+.hb .tr i{display:block;height:100%;background:var(--ink)}
+.hb b{font-variant-numeric:tabular-nums;font-weight:600}
+table.map{width:100%;border-collapse:collapse;font-size:14px}
+table.map td{padding:4px 2px;border-bottom:1px solid var(--line);vertical-align:middle}
+table.map select{min-height:36px;padding:4px 8px;font-size:14px}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:14px}
+.kv dt{color:var(--mute)}.kv dd{margin:0;text-align:right;font-variant-numeric:tabular-nums}
+.hide{display:none!important}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="logo">SNEAKER<b>WAREHOUSE</b></div>
+  <button id="syncBtn" class="hide" data-act="syncNow" title="Synchronisieren"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 1-14 5.3M4 12a8 8 0 0 1 14-5.3"/><path d="M18 3v4h-4M6 21v-4h4"/></svg></button>
+  <button data-act="nav" data-view="settings" title="Einstellungen"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1.3l2-1.5-2-3.4-2.3 1a7 7 0 0 0-2.2-1.3L14 3h-4l-.4 2.5a7 7 0 0 0-2.2 1.3l-2.3-1-2 3.4 2 1.5a7 7 0 0 0 0 2.6l-2 1.5 2 3.4 2.3-1a7 7 0 0 0 2.2 1.3L10 21h4l.4-2.5a7 7 0 0 0 2.2-1.3l2.3 1 2-3.4-2-1.5c.1-.4.1-.9.1-1.3z"/></svg></button>
+</header>
+<main id="view"></main>
+<nav class="tabs" id="tabs">
+  <button data-act="nav" data-view="capture"><svg viewBox="0 0 24 24"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"/><path d="M8 9v6M11 9v6M14 9v6M16.5 9v6"/></svg>Erfassen<span class="dot hide" id="dotCap"></span></button>
+  <button data-act="nav" data-view="inventory"><svg viewBox="0 0 24 24"><path d="M3 8l9-5 9 5v8l-9 5-9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg>Bestand</button>
+  <button data-act="nav" data-view="sales"><svg viewBox="0 0 24 24"><path d="M4 7h13l3 4v6H4z"/><circle cx="8" cy="18" r="2"/><circle cx="16" cy="18" r="2"/><path d="M9 11h4"/></svg>Verkauf</button>
+  <button data-act="nav" data-view="returns"><svg viewBox="0 0 24 24"><path d="M9 14l-5-5 5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/></svg>Retouren<span class="dot hide" id="dotRet"></span></button>
+  <button data-act="nav" data-view="dash"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Übersicht</button>
+</nav>
+<div id="sheets"></div>
+<div id="toasts"></div>
+<input type="file" id="fCam" accept="image/*" capture="environment" hidden>
+<input type="file" id="fGal" accept="image/*" multiple hidden>
+<input type="file" id="fShoe" accept="image/*" hidden>
+<input type="file" id="fJson" accept=".json,application/json" hidden>
+<input type="file" id="fCsv" accept=".csv,text/csv,text/plain" hidden>
+<script>
+/* ---- 01-core.js ---- */
+'use strict';
+const APP_VERSION = '8.0';
+
+/* ================= Helfer ================= */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+const nowISO = () => new Date().toISOString();
+const pad2 = n => String(n).padStart(2, '0');
+const isoDay = d => d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate());
+const today = () => isoDay(new Date());
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+/** Zahl aus deutscher oder englischer Schreibweise ("129,90" / "1.299,00" / "129.90"). */
+function num(v) {
+  if (typeof v === 'number') return isFinite(v) ? v : 0;
+  if (v == null) return 0;
+  let s = String(v).trim().replace(/[^\d.,-]/g, '');
+  if (!s) return 0;
+  if (/,\d{1,2}$/.test(s)) s = s.replace(/\./g, '').replace(',', '.');
+  else s = s.replace(/,/g, '');
+  const n = parseFloat(s);
+  return isFinite(n) ? n : 0;
+}
+const r2 = n => Math.round(n * 100) / 100;
+const EUR = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' });
+const eur = n => EUR.format(n || 0);
+const eur0 = n => new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(n || 0);
+const deNum = n => (n == null || n === '') ? '' : String(r2(Number(n))).replace('.', ',');
+
+/** Beliebige Datumsschreibweise → "YYYY-MM-DD" (oder ""). */
+function toISODate(v) {
+  if (!v) return '';
+  const s = String(v).trim();
+  let m = s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+  if (m) return m[1] + '-' + pad2(m[2]) + '-' + pad2(m[3]);
+  m = s.match(/^(\d{1,2})\.(\d{1,2})\.(\d{2,4})/);
+  if (m) return (m[3].length === 2 ? '20' + m[3] : m[3]) + '-' + pad2(m[2]) + '-' + pad2(m[1]);
+  m = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{2,4})/);
+  if (m) return (m[3].length === 2 ? '20' + m[3] : m[3]) + '-' + pad2(m[1]) + '-' + pad2(m[2]);
+  const d = new Date(s);
+  return isNaN(d) ? '' : isoDay(d);
+}
+const dDE = iso => { const s = toISODate(iso); return s ? s.slice(8, 10) + '.' + s.slice(5, 7) + '.' + s.slice(0, 4) : ''; };
+function daysSince(iso) {
+  const s = toISODate(iso); if (!s) return null;
+  const a = new Date(s + 'T00:00:00'), b = new Date(today() + 'T00:00:00');
+  return Math.round((b - a) / 864e5);
+}
+
+class AppErr extends Error {}
+const errMsg = e => (e instanceof AppErr) ? e.message : (e && e.name === 'AbortError') ? 'Zeitüberschreitung – bitte erneut versuchen.'
+  : (e && /Failed to fetch|NetworkError|Load failed/i.test(e.message || '')) ? 'Keine Verbindung (Netz oder Adresse prüfen).' : ('Fehler: ' + (e && e.message || e));
+
+async function fetchT(url, opt = {}, ms = 30000) {
+  const c = new AbortController(); const t = setTimeout(() => c.abort(), ms);
+  try { return await fetch(url, { ...opt, signal: c.signal }); } finally { clearTimeout(t); }
+}
+
+function toast(msg, cls = '', ms = 3200) {
+  const el = document.createElement('div'); el.className = 'toast ' + cls; el.textContent = msg;
+  const box = $('#toasts'); while (box.children.length >= 2) box.firstChild.remove();
+  box.appendChild(el); setTimeout(() => el.remove(), ms);
+}
+
+/* ---- Sheets / Dialoge ---- */
+function sheet({ title = '', body = '', foot = '', cls = '', onClose = null, data = {} }) {
+  const el = document.createElement('div'); el.className = 'sheet ' + cls;
+  Object.assign(el.dataset, data);
+  el.innerHTML = `<div class="sheet-card"><header><h3>${esc(title)}</h3><button class="x" data-act="closeSheet" aria-label="Schließen">×</button></header>
+    <div class="sheet-body">${body}</div>${foot ? `<footer>${foot}</footer>` : ''}</div>`;
+  el._onClose = onClose;
+  el.addEventListener('click', e => { if (e.target === el && !el.dataset.lock) closeSheet(el); });
+  $('#sheets').appendChild(el);
+  return el;
+}
+function closeSheet(el) { if (!el) return; const f = el._onClose; el.remove(); if (f) f(); }
+function ask(msg, { ok = 'OK', cancel = 'Abbrechen', danger = false, html = false } = {}) {
+  return new Promise(res => {
+    let done = false;
+    const el = sheet({ cls: 'dlg', title: 'Bitte bestätigen', body: `<p style="margin:0">${html ? msg : esc(msg)}</p>`,
+      foot: `${cancel ? `<button class="btn ghost" data-act="dlgNo">${esc(cancel)}</button>` : ''}<button class="btn ${danger ? 'bad' : 'pri'}" data-act="dlgYes">${esc(ok)}</button>`,
+      onClose: () => { if (!done) res(false); } });
+    el._answer = v => { done = true; closeSheet(el); res(v); };
+  });
+}
+const info = (msg, html) => ask(msg, { ok: 'OK', cancel: '', html });
+
+/* ---- Datei speichern / teilen ---- */
+async function dl(name, text, mime = 'text/plain') {
+  const blob = new Blob([text], { type: mime + ';charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = name; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 4000);
+}
+
+/* ---- CSV ---- */
+function csvOut(rows, sep = ';') {
+  const q = v => { const s = String(v ?? ''); return /["\n\r;,]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
+  return '﻿' + rows.map(r => r.map(q).join(sep)).join('\r\n');
+}
+function csvIn(text) {
+  text = String(text).replace(/^﻿/, '');
+  const head = text.split(/\r?\n/, 1)[0] || '';
+  const cnt = c => head.split(c).length - 1;
+  const sep = cnt(';') >= cnt(',') && cnt(';') >= cnt('\t') && cnt(';') > 0 ? ';' : (cnt('\t') > cnt(',') ? '\t' : ',');
+  const rows = []; let row = [], cur = '', q = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (q) { if (c === '"') { if (text[i + 1] === '"') { cur += '"'; i++; } else q = false; } else cur += c; }
+    else if (c === '"') q = true;
+    else if (c === sep) { row.push(cur); cur = ''; }
+    else if (c === '\n') { row.push(cur); rows.push(row); row = []; cur = ''; }
+    else if (c !== '\r') cur += c;
+  }
+  if (cur !== '' || row.length) { row.push(cur); rows.push(row); }
+  return rows.filter(r => r.some(c => String(c).trim() !== ''));
+}
+
+/* ================= Speicher (IndexedDB, Fallback localStorage) ================= */
+const DB = {
+  db: null, mem: new Map(),
+  open() {
+    return new Promise(res => {
+      try {
+        const rq = indexedDB.open('sneaker-warehouse', 1);
+        rq.onupgradeneeded = () => { const d = rq.result; for (const s of ['kv', 'img']) if (!d.objectStoreNames.contains(s)) d.createObjectStore(s); };
+        rq.onsuccess = () => { this.db = rq.result; res(true); };
+        rq.onerror = () => res(false); rq.onblocked = () => res(false);
+      } catch (e) { res(false); }
+    });
+  },
+  get(store, key) {
+    if (!this.db) { if (store !== 'kv') return Promise.resolve(this.mem.get(key) ?? null); try { return Promise.resolve(JSON.parse(localStorage.getItem('sw8:' + key) || 'null')); } catch (e) { return Promise.resolve(null); } }
+    return new Promise((res, rej) => { const rq = this.db.transaction(store).objectStore(store).get(key); rq.onsuccess = () => res(rq.result ?? null); rq.onerror = () => rej(rq.error); });
+  },
+  put(store, key, val) {
+    if (!this.db) { if (store !== 'kv') this.mem.set(key, val); else try { localStorage.setItem('sw8:' + key, JSON.stringify(val)); } catch (e) {} return Promise.resolve(); }
+    return new Promise((res, rej) => { const t = this.db.transaction(store, 'readwrite'); t.objectStore(store).put(val, key); t.oncomplete = () => res(); t.onerror = () => rej(t.error); t.onabort = () => rej(t.error); });
+  },
+  putMany(store, entries) {
+    if (!this.db) return Promise.all(entries.map(([k, v]) => this.put(store, k, v)));
+    return new Promise((res, rej) => { const t = this.db.transaction(store, 'readwrite'), os = t.objectStore(store); entries.forEach(([k, v]) => os.put(v, k)); t.oncomplete = () => res(); t.onerror = () => rej(t.error); t.onabort = () => rej(t.error); });
+  },
+  del(store, key) {
+    if (!this.db) { if (store !== 'kv') this.mem.delete(key); else localStorage.removeItem('sw8:' + key); return Promise.resolve(); }
+    return new Promise((res, rej) => { const t = this.db.transaction(store, 'readwrite'); t.objectStore(store).delete(key); t.oncomplete = () => res(); t.onerror = () => rej(t.error); });
+  }
+};
+
+/* ================= Zustand ================= */
+const DEFAULTS = {
+  settings: {
+    aiKey: '', aiModel: 'claude-sonnet-5-5', aiViaWorker: false,
+    worker: '', token: '', sxOn: true, sync: false,
+    doubleRead: true, webLookup: true, keepPhoto: true,
+    vat: 19, retDays: 14, retGrace: 2, refundDelay: 3, batch: {}
+  },
+  lists: {
+    locations: ['G26', 'SCH26', 'AV26', 'AZ26', 'DG26'],
+    dealers: [],
+    platforms: ['StockX', 'GOAT', 'eBay', 'Kleinanzeigen', 'Privat']
+  }
+};
+const S = {
+  items: [], sales: [], drafts: [], catalog: {}, meta: {},
+  settings: structuredClone(DEFAULTS.settings), lists: structuredClone(DEFAULTS.lists),
+  ui: { view: 'capture', inv: { q: '', status: 'stock', sort: 'new', loc: '', brand: '', n: 60 }, sale: { q: '', sel: '' } }
+};
+const PERSIST = ['items', 'sales', 'drafts', 'catalog', 'meta', 'settings', 'lists'];
+const SYNCED = ['items', 'sales', 'catalog', 'lists'];
+
+async function loadState() {
+  await DB.open();
+  for (const k of PERSIST) {
+    const v = await DB.get('kv', k);
+    if (v == null) continue;
+    if (k === 'settings') S.settings = { ...S.settings, ...v, batch: { ...(v.batch || {}) } };
+    else if (k === 'lists') S.lists = { ...S.lists, ...v };
+    else S[k] = v;
+  }
+  try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch (e) {}
+}
+const _dirty = new Set(); let _saveT = 0;
+function save(...keys) {
+  keys.forEach(k => _dirty.add(k));
+  clearTimeout(_saveT); _saveT = setTimeout(flush, 0);
+  if (keys.some(k => SYNCED.includes(k)) && typeof scheduleSync === 'function') scheduleSync();
+}
+async function flush() {
+  clearTimeout(_saveT);
+  const ks = [..._dirty]; _dirty.clear(); if (!ks.length) return;
+  try { await DB.putMany('kv', ks.map(k => [k, S[k]])); }
+  catch (e) { console.error('save', ks, e); ks.forEach(k => _dirty.add(k)); toast('Speichern fehlgeschlagen – bitte Backup sichern und Seite neu laden.', 'bad', 6000); }
+}
+
+/* ---- Fachlogik ---- */
+const live = arr => arr.filter(x => !x._del);
+const itemById = id => S.items.find(x => x.id === id && !x._del);
+const vatF = () => 1 + (num(S.settings.vat) || 19) / 100;
+const buyNet = it => r2(it.buyVat ? num(it.buyPrice) / vatF() : num(it.buyPrice));
+const saleNet = s => r2(s.vat ? num(s.price) / vatF() : num(s.price));
+function saleProfit(s) { const it = S.items.find(x => x.id === s.itemId); return r2(saleNet(s) - num(s.fees) - num(s.ship) - (it ? buyNet(it) : num(s.buyNet))); }
+function touch(o) { o.updatedAt = nowISO(); return o; }
+function addToList(name, val) {
+  val = String(val || '').trim(); if (!val) return;
+  const l = S.lists[name] || (S.lists[name] = []);
+  if (!l.some(x => x.toLowerCase() === val.toLowerCase())) { l.push(val); save('lists'); }
+}
+/** Größe vereinheitlichen: "42 2/3" → "42⅔", "42,5" → "42.5", "EU 44" → "44". */
+function normSize(v) {
+  let s = String(v ?? '').trim().replace(/^(EU|EUR|FR|US|UK|CM|JP)\s*/i, '').replace(',', '.');
+  s = s.replace(/\s*1\/3/, '⅓').replace(/\s*2\/3/, '⅔').replace(/\s*1\/2/, '.5').replace(/\s*½/, '.5').replace(/\.0$/, '');
+  return s.replace(/\s+/g, ' ');
+}
+const sizeVal = s => { const t = normSize(s); const b = parseFloat(t) || 0; return b + (t.includes('⅓') ? 1 / 3 : t.includes('⅔') ? 2 / 3 : 0); };
+
+/* Rückgabefrist: Tage übrig (negativ = überfällig); null = keine Erinnerung */
+function retLeft(it) {
+  if (it.status !== 'stock' || !it.deliveryDate || (it.ret && it.ret.keep)) return null;
+  const d = daysSince(it.deliveryDate); if (d == null || d < 0) return null;
+  const st = S.settings; const left = num(st.retDays) - d;
+  return left < -num(st.retGrace) ? null : left;
+}
+function refundDue(it) {
+  if (it.status !== 'returned' || !it.ret || it.ret.refundDone) return false;
+  const d = daysSince(it.ret.date); return d != null && d >= num(S.settings.refundDelay);
+}
+
+/* ---- Aktionen (Event-Delegation) ---- */
+const ACT = {}, CHG = {}, INP = {}, VIEWS = {}, AFTER = {};
+ACT.closeSheet = el => closeSheet(el.closest('.sheet'));
+ACT.dlgYes = el => el.closest('.sheet')._answer(true);
+ACT.dlgNo = el => el.closest('.sheet')._answer(false);
+ACT.chip = el => {
+  const f = el.closest('.fld'); const inp = f && $('input,select', f); if (!inp) return;
+  inp.value = el.dataset.v; inp.dispatchEvent(new Event('input', { bubbles: true }));
+  $$('.chip', f).forEach(c => c.classList.toggle('on', c === el));
+};
+
+/* ---- Formular-Bausteine ---- */
+function fld(key, label, val, o = {}) {
+  const cls = 'fld' + (o.w ? ' ' + o.w : '');
+  const req = o.req ? ' <span class="req">*</span>' : '';
+  if (o.check) return `<div class="${cls}"><span class="lbl">&nbsp;</span><label class="chk"><input type="checkbox" data-f="${key}" ${val ? 'checked' : ''}> ${esc(label)}</label></div>`;
+  let ctl;
+  if (o.select) ctl = `<select data-f="${key}">${o.select.map(x => `<option ${x === val ? 'selected' : ''}>${esc(x)}</option>`).join('')}</select>`;
+  else if (o.area) ctl = `<textarea data-f="${key}">${esc(val)}</textarea>`;
+  else ctl = `<input type="${o.date ? 'date' : 'text'}" data-f="${key}" value="${esc(o.dec ? deNum(val) : val)}" class="${o.mono ? 'mono' : ''}"
+      ${o.dec ? 'inputmode="decimal"' : ''} ${o.numk ? 'inputmode="numeric"' : ''} ${o.mono ? 'autocapitalize="characters" autocorrect="off" spellcheck="false"' : ''} autocomplete="off" placeholder="${esc(o.ph || '')}">`;
+  const chips = o.chips && o.chips.length ? `<div class="chips">${o.chips.slice(0, 14).map(c => `<button type="button" class="chip ${c === val ? 'on' : ''}" data-act="chip" data-v="${esc(c)}">${esc(c)}</button>`).join('')}</div>` : '';
+  return `<div class="${cls}"><label>${esc(label)}${req}</label>${ctl}${chips}</div>`;
+}
+function readForm(root) {
+  const o = {};
+  $$('[data-f]', root).forEach(el => { o[el.dataset.f] = el.type === 'checkbox' ? el.checked : el.value.trim(); });
+  return o;
+}
+const BRAND_CHIPS = ['Nike', 'Jordan', 'adidas', 'New Balance', 'ASICS', 'Puma'];
+function itemFormHTML(v, { qty = false } = {}) {
+  return `<div class="form">
+    ${fld('sku', 'SKU (Hersteller)', v.sku || '', { req: 1, mono: 1, w: 'h', ph: 'z. B. DD1391-100' })}
+    ${fld('brand', 'Marke', v.brand || '', { req: 1, w: 'h' })}
+    ${fld('name', 'Produktname (wie am Markt)', v.name || '', { req: 1 })}
+    ${fld('model', 'Modell (Label-Text)', v.model || '')}
+    ${fld('color', 'Farbe', v.color || '')}
+    ${fld('size', 'Größe EU', v.size || '', { req: 1, w: 'h', ph: '42.5 / 42⅔' })}
+    ${fld('sizeUS', 'US', v.sizeUS || '', { w: 'q' })}${fld('sizeUK', 'UK', v.sizeUK || '', { w: 'q' })}
+    ${fld('buyPrice', 'Einkaufspreis €', v.buyPrice ?? '', { req: 1, dec: 1, w: 'h' })}
+    ${fld('buyVat', 'inkl. MwSt', v.buyVat, { check: 1, w: 'h' })}
+    ${fld('location', 'Lagerort', v.location || '', { req: 1, chips: S.lists.locations })}
+    ${fld('dealer', 'Händler', v.dealer || '', { chips: S.lists.dealers })}
+    ${fld('orderNo', 'Bestellnummer', v.orderNo || '', { w: 'h' })}
+    ${fld('buyDate', 'Kaufdatum', toISODate(v.buyDate), { date: 1, w: 'h' })}
+    ${fld('invoiceDate', 'Rechnungsdatum', toISODate(v.invoiceDate), { date: 1, w: 'h' })}
+    ${fld('deliveryDate', 'Lieferdatum (Rückgabefrist)', toISODate(v.deliveryDate), { date: 1, w: 'h' })}
+    ${fld('retail', 'Retail-Preis', v.retail ?? '', { dec: 1, w: 'h' })}
+    ${fld('retailCur', 'Währung', v.retailCur || 'EUR', { select: ['EUR', 'USD'], w: 'q' })}
+    ${qty ? fld('qty', 'Anzahl', v.qty || '1', { numk: 1, w: 'q' }) : '<div class="fld q"></div>'}
+    ${fld('releaseDate', 'Release', toISODate(v.releaseDate), { date: 1, w: 'h' })}
+    ${fld('gtin', 'Barcode (GTIN)', v.gtin || '', { numk: 1, w: 'h' })}
+    ${fld('note', 'Notiz', v.note || '', { area: 1 })}
+  </div>`;
+}
+const REQUIRED = [['sku', 'SKU'], ['brand', 'Marke'], ['name', 'Produktname'], ['size', 'Größe'], ['buyPrice', 'Einkaufspreis'], ['location', 'Lagerort']];
+/** Formularwerte in saubere Artikelfelder wandeln; liefert {v, missing[]} */
+function cleanItemFields(f) {
+  const v = { ...f };
+  v.sku = canonSku(v.brand, v.sku); v.brand = normBrand(v.brand) || v.brand;
+  v.size = normSize(v.size); v.sizeUS = normSize(v.sizeUS); v.sizeUK = normSize(v.sizeUK);
+  v.buyPrice = (v.buyPrice === '' || v.buyPrice == null) ? '' : r2(num(v.buyPrice));
+  v.retail = v.retail === '' || v.retail == null ? '' : r2(num(v.retail));
+  v.gtin = gtinClean(v.gtin);
+  for (const k of ['buyDate', 'invoiceDate', 'deliveryDate', 'releaseDate']) v[k] = toISODate(v[k]);
+  const missing = REQUIRED.filter(([k]) => v[k] === '' || v[k] == null).map(([k, l]) => ({ k, l }));
+  return { v, missing };
+}
+function markMissing(root, missing) {
+  $$('[data-f]', root).forEach(el => el.classList.remove('miss'));
+  missing.forEach(m => { const el = $(`[data-f="${m.k}"]`, root); if (el) el.classList.add('miss'); });
+  if (missing.length) { const el = $(`[data-f="${missing[0].k}"]`, root); if (el) el.scrollIntoView({ block: 'center', behavior: 'smooth' }); }
+}
+const lvlBars = l => `<span class="lv l${l || 0}" title="Prüfstufe ${l || 0}/3"><i></i><i></i><i></i></span>`;
+const LVL_TXT = ['Ungeprüft', 'Plausibel', 'Bestätigt', 'Doppelt bestätigt'];
+function evHTML(lvl, ev) {
+  return `<div class="verd v${lvl || 0}"><span class="pill">${LVL_TXT[lvl || 0]}</span>${lvlBars(lvl)}</div>
+  <ul class="ev">${(ev || []).map(e => `<li class="${e.ok === true ? 'y' : e.ok === false ? 'n' : 'u'}"><span class="i">${e.ok === true ? '✓' : e.ok === false ? '!' : 'i'}</span><span>${esc(e.t)}${e.url ? ` <a href="${esc(e.url)}" target="_blank" rel="noopener">Quelle</a>` : ''}</span></li>`).join('')}</ul>`;
+}
+
+/* ---- 02-sku.js ---- */
+/* ================= SKU- und Barcode-Regeln (rein rechnerisch, ohne KI) ================= */
+const BRAND_ALIASES = [
+  ['Jordan', /jordan/i], ['Nike', /nike/i], ['Yeezy', /yeezy/i], ['adidas', /adidas/i], ['New Balance', /new\s*balance|^nb$/i],
+  ['ASICS', /asics|onitsuka/i], ['Puma', /puma/i], ['Converse', /converse/i], ['Vans', /vans/i], ['Reebok', /reebok/i],
+  ['Salomon', /salomon/i], ['On', /^on(\s|$)|on running/i], ['Saucony', /saucony/i], ['HOKA', /hoka/i], ['UGG', /ugg/i],
+  ['Crocs', /crocs/i], ['Timberland', /timberland/i], ['Birkenstock', /birkenstock/i], ['Under Armour', /under\s*armou?r/i], ['Mizuno', /mizuno/i]
+];
+function normBrand(b) {
+  const s = String(b || '').trim(); if (!s) return '';
+  for (const [name, re] of BRAND_ALIASES) if (re.test(s)) return name;
+  return s.replace(/\s+/g, ' ');
+}
+const skuKey = s => String(s || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+const RE_NIKE = /^(?:[A-Z]{2}\d{4}|\d{6})-\d{3}$/, RE_ASICS = /^\d{4}[A-Z]\d{3}-\d{3}$/, RE_PUMA = /^\d{6}-\d{2}$/;
+const SKU_RULES = {
+  Nike: RE_NIKE, Jordan: RE_NIKE,
+  adidas: /^(?=.*[A-Z])(?=.*\d)[A-Z0-9]{6}$/, Yeezy: /^(?=.*[A-Z])(?=.*\d)[A-Z0-9]{6}$/, Reebok: /^(?:(?=.*[A-Z])(?=.*\d)[A-Z0-9]{6}|\d{9})$/,
+  'New Balance': /^[A-Z]{1,4}\d{3,5}[A-Z0-9]{0,4}$/, ASICS: RE_ASICS, Puma: RE_PUMA,
+  Converse: /^[A-Z]?\d{5,6}[A-Z]$/, Vans: /^VN[A-Z0-9]{6,12}$/, Salomon: /^L?\d{8}$/
+};
+const SKU_HINT = { Nike: 'DD1391-100', Jordan: 'DZ5485-612', adidas: 'GW2871', Yeezy: 'HQ4540', 'New Balance': 'U9060BLK', ASICS: '1201A789-020', Puma: '374915-01', Converse: '162050C', Vans: 'VN0A4BV4VXL', Salomon: 'L41750800' };
+
+/** Schreibweise vereinheitlichen (Bindestrich/Leerzeichen/Punkt) – ändert keine Zeichen. */
+function canonSku(brand, raw) {
+  let s = String(raw || '').toUpperCase().trim().replace(/[‐‑‒–—]/g, '-').replace(/\s+/g, ' ');
+  if (!s) return '';
+  const k = skuKey(s), b = normBrand(brand);
+  let m;
+  if ((m = k.match(/^([A-Z]{2}\d{4}|\d{6})(\d{3})$/)) && (b === 'Nike' || b === 'Jordan' || (!SKU_RULES[b] && /^[A-Z]{2}/.test(k)))) return m[1] + '-' + m[2];
+  if ((m = k.match(/^(\d{4}[A-Z]\d{3})(\d{3})$/))) return m[1] + '-' + m[2];
+  if (b === 'Puma' && (m = k.match(/^(\d{6})(\d{2})$/))) return m[1] + '-' + m[2];
+  if (['adidas', 'Yeezy', 'New Balance', 'Converse', 'Vans', 'Salomon'].includes(b)) return k;
+  return s.replace(/\s*-\s*/g, '-').replace(/[ .]/g, '-');
+}
+/** true = passt zum Markenmuster, false = passt nicht, null = Marke ohne bekanntes Muster */
+function validateSku(brand, sku) {
+  const re = SKU_RULES[normBrand(brand)]; if (!re) return null;
+  return re.test(canonSku(brand, sku));
+}
+function guessBrandFromSku(sku) {
+  const s = canonSku('', sku);
+  if (RE_ASICS.test(s)) return 'ASICS';
+  if (/^[A-Z]{2}\d{4}-\d{3}$/.test(s)) return 'Nike';
+  if (/^VN0/.test(s)) return 'Vans';
+  return '';
+}
+/** Typische Lesefehler an Stellen korrigieren, an denen das Markenmuster Ziffer bzw. Buchstabe vorschreibt. */
+const TO_DIGIT = { O: '0', Q: '0', D: '0', I: '1', L: '1', Z: '2', S: '5', G: '6', T: '7', B: '8' };
+const TO_LETTER = { '0': 'O', '1': 'I', '2': 'Z', '5': 'S', '6': 'G', '8': 'B' };
+function repairSku(brand, raw) {
+  const b = normBrand(brand), k = skuKey(raw);
+  const fix = (mask) => {
+    if (k.length !== mask.length) return null;
+    let out = '';
+    for (let i = 0; i < k.length; i++) {
+      const c = k[i], want = mask[i];
+      if (want === 'D') out += /\d/.test(c) ? c : (TO_DIGIT[c] || c);
+      else if (want === 'L') out += /[A-Z]/.test(c) ? c : (TO_LETTER[c] || c);
+      else out += c;
+    }
+    return out;
+  };
+  let cand = null;
+  if (b === 'Nike' || b === 'Jordan') {
+    const a = fix('LLDDDDDDD'), n = fix('DDDDDDDDD');
+    cand = (a && /^[A-Z]{2}\d{7}$/.test(a)) ? a : (n && /^\d{9}$/.test(n) && /^\d/.test(k)) ? n : null;
+  } else if (b === 'ASICS') { const a = fix('DDDDLDDDDDD'); cand = a && /^\d{4}[A-Z]\d{6}$/.test(a) ? a : null; }
+  else if (b === 'Puma') { const a = fix('DDDDDDDD'); cand = a && /^\d{8}$/.test(a) ? a : null; }
+  const sku = canonSku(b, cand || raw);
+  return { sku, changed: !!cand && cand !== k };
+}
+/** Varianten mit je einem vertauschten Verwechslungszeichen (für Suche im Katalog). */
+function skuVariants(sku, max = 6) {
+  const k = skuKey(sku), out = new Set();
+  const swap = { '0': 'O', O: '0', '1': 'I', I: '1', '5': 'S', S: '5', '8': 'B', B: '8', '2': 'Z', Z: '2', '6': 'G', G: '6' };
+  for (let i = 0; i < k.length && out.size < max; i++) if (swap[k[i]]) out.add(k.slice(0, i) + swap[k[i]] + k.slice(i + 1));
+  return [...out];
+}
+/** StockX nennt gelegentlich mehrere Style-IDs ("A/B"). */
+const styleKeys = styleId => String(styleId || '').split(/[\/,;]| or /i).map(skuKey).filter(Boolean);
+function nearSku(a, b) {
+  const x = skuKey(a), y = skuKey(b); if (!x || x.length !== y.length) return false;
+  let d = 0; for (let i = 0; i < x.length; i++) if (x[i] !== y[i]) d++;
+  return d > 0 && d <= 2;
+}
+
+/* ---- Barcode (GTIN) ---- */
+const gtinClean = s => String(s || '').replace(/\D/g, '');
+function gtinValid(d) {
+  d = gtinClean(d);
+  if (!/^(\d{8}|\d{12,14})$/.test(d)) return false;
+  const a = d.split('').map(Number), check = a.pop();
+  let sum = 0; a.reverse().forEach((n, i) => { sum += n * (i % 2 === 0 ? 3 : 1); });
+  return (10 - (sum % 10)) % 10 === check;
+}
+const gtinCore = d => gtinClean(d).replace(/^0+/, '');
+const sameGtin = (a, b) => !!gtinCore(a) && gtinCore(a) === gtinCore(b);
+function gtinForms(d) {
+  d = gtinClean(d); const c = gtinCore(d), s = new Set([d]);
+  if (c.length <= 12) s.add(c.padStart(12, '0'));
+  s.add(c.padStart(13, '0'));
+  return [...s].filter(Boolean);
+}
+
+/* ---- 03-ai.js ---- */
+/* ================= KI (Anthropic Messages API) ================= */
+const MODEL_FALLBACKS = ['claude-sonnet-5-5', 'claude-sonnet-4-5', 'claude-sonnet-4-20250514'];
+const workerBase = () => String(S.settings.worker || '').trim().replace(/\/+$/, '');
+const workerOn = () => !!(workerBase() && S.settings.token);
+
+const AI = {
+  ready() { const s = S.settings; return s.aiViaWorker ? workerOn() : !!s.aiKey; },
+
+  async call(body, tries = 0, tried = []) {
+    const st = S.settings;
+    if (!this.ready()) throw new AppErr('KI ist nicht eingerichtet (Einstellungen → KI-Zugang).');
+    const model = body.model || st.aiModel || MODEL_FALLBACKS[0];
+    const req = { max_tokens: 1500, ...body, model };
+    let url, headers;
+    if (st.aiViaWorker) { url = workerBase() + '/ai/messages'; headers = { 'content-type': 'application/json', authorization: 'Bearer ' + st.token }; }
+    else { url = 'https://api.anthropic.com/v1/messages'; headers = { 'content-type': 'application/json', 'x-api-key': st.aiKey, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' }; }
+    const r = await fetchT(url, { method: 'POST', headers, body: JSON.stringify(req) }, 120000);
+    if (r.ok) { if (model !== st.aiModel && tried.length) { st.aiModel = model; save('settings'); } return r.json(); }
+    let j = {}; try { j = await r.json(); } catch (e) {}
+    const type = (j.error && j.error.type) || '', msg = (j.error && j.error.message) || r.statusText;
+    if (r.status === 404 && /model/i.test(msg + type)) {
+      const next = MODEL_FALLBACKS.find(m => m !== model && !tried.includes(m));
+      if (next) return this.call({ ...body, model: next }, tries, [...tried, model]);
+      throw new AppErr('KI-Modell „' + model + '“ ist nicht verfügbar. Bitte in den Einstellungen ein Modell wählen.');
+    }
+    if (r.status === 400 && /tool_choice|thinking/i.test(msg) && body.tool_choice && body.tool_choice.type === 'tool') {
+      /* manche Modelle erlauben kein erzwungenes Werkzeug – dann per Anweisung */
+      return this.call({ ...body, tool_choice: { type: 'auto' }, system: (body.system || '') + '\n\nYou must answer by calling the tool "' + body.tool_choice.name + '" exactly once.' }, tries, tried);
+    }
+    if ((r.status === 429 || r.status === 529 || r.status >= 500) && tries < 2) { await sleep(1500 * (tries + 1) * (r.status === 429 ? 3 : 1)); return this.call(body, tries + 1, tried); }
+    if (r.status === 401 || r.status === 403) throw new AppErr(st.aiViaWorker ? 'Zwischenstation lehnt ab – App-Passwort prüfen.' : 'Anthropic-API-Key ungültig oder ohne Berechtigung.');
+    if (r.status === 429) throw new AppErr('KI-Limit erreicht – kurz warten und erneut versuchen.');
+    throw new AppErr('KI-Fehler (' + r.status + '): ' + msg);
+  },
+
+  tool(resp, name) { const b = (resp.content || []).find(c => c.type === 'tool_use' && c.name === name); return b ? b.input : null; },
+  img(dataUrl) { const m = String(dataUrl).match(/^data:(image\/\w+);base64,(.+)$/); return { type: 'image', source: { type: 'base64', media_type: m ? m[1] : 'image/jpeg', data: m ? m[2] : dataUrl } }; },
+
+  /** Liest alle Karton-Labels eines Fotos. Antwort: Array roher Label-Daten. */
+  async readLabels(dataUrl) {
+    const resp = await this.call({
+      max_tokens: 2000, system: PROMPT_LABEL,
+      tools: [TOOL_LABELS], tool_choice: { type: 'tool', name: 'report_labels' },
+      messages: [{ role: 'user', content: [this.img(dataUrl), { type: 'text', text: 'Read every shoebox label in this photo and report it with the tool.' }] }]
+    });
+    const out = this.tool(resp, 'report_labels');
+    if (!out) throw new AppErr('KI hat keine auswertbare Antwort geliefert.');
+    const labels = (out.labels || []).filter(l => l && (l.style_code || l.barcode_digits || l.model_text));
+    if (!labels.length) throw new AppErr('Kein Karton-Label erkannt' + (out.image_problem ? ': ' + out.image_problem : '. Bitte Label formatfüllend und scharf fotografieren.'));
+    return labels;
+  },
+
+  /** Zweite, unabhängige Lesung – nur der Style-Code, Zeichen für Zeichen. */
+  async rereadSku(dataUrl) {
+    const resp = await this.call({
+      max_tokens: 400, system: PROMPT_REREAD,
+      tools: [TOOL_REREAD], tool_choice: { type: 'tool', name: 'report_style_code' },
+      messages: [{ role: 'user', content: [this.img(dataUrl), { type: 'text', text: 'Transcribe only the manufacturer style code of the shoebox label.' }] }]
+    });
+    const out = this.tool(resp, 'report_style_code');
+    return out && out.legible !== false ? String(out.style_code || '').trim() : '';
+  },
+
+  /** Schuh-Foto (ohne Label): Vorschläge mit Suchbegriffen, keine erfundenen SKUs. */
+  async identifyShoe(dataUrl) {
+    const resp = await this.call({
+      max_tokens: 1200, system: PROMPT_SHOE,
+      tools: [TOOL_SHOE], tool_choice: { type: 'tool', name: 'report_candidates' },
+      messages: [{ role: 'user', content: [this.img(dataUrl), { type: 'text', text: 'Which sneaker is this? Report candidates with the tool.' }] }]
+    });
+    const out = this.tool(resp, 'report_candidates');
+    if (!out || !(out.candidates || []).length) throw new AppErr('Auf dem Foto wurde kein Sneaker erkannt.');
+    return out;
+  },
+
+  /** Websuche als Ersatz, wenn StockX nicht angebunden ist oder nichts findet. */
+  async web(prompt) {
+    let messages = [{ role: 'user', content: prompt }], resp, guard = 0;
+    do {
+      resp = await this.call({ max_tokens: 1800, system: PROMPT_WEB, tools: [{ type: 'web_search_20250305', name: 'web_search', max_uses: 4 }], messages });
+      if (resp.stop_reason === 'pause_turn') messages = [...messages.slice(0, 1), { role: 'assistant', content: resp.content }];
+    } while (resp.stop_reason === 'pause_turn' && ++guard < 3);
+    const text = (resp.content || []).filter(c => c.type === 'text').map(c => c.text).join('');
+    const m = text.match(/\{[\s\S]*\}/);
+    if (!m) return null;
+    try { return JSON.parse(m[0]); } catch (e) { return null; }
+  },
+  webSku(sku, brand, hint) {
+    return this.web(`Manufacturer style code: "${sku}"\nBrand on label: "${brand || 'unknown'}"\nLabel text: "${hint || ''}"\n
+Find this exact sneaker. Answer with ONE JSON object only:
+{"found":true|false,"sku":"style code exactly as shown by the source","name":"market product name incl. colourway nickname","brand":"","colorway":"","retail_price":number|null,"retail_currency":"EUR"|"USD"|null,"release_date":"YYYY-MM-DD"|null,"source_url":"page that shows this exact style code","confidence":"high"|"medium"|"low"}
+"found" may only be true if a page explicitly lists this exact style code. Prefer stockx.com, goat.com, the brand's own site, sneakernews.com.`);
+  },
+  webShoe(desc) {
+    return this.web(`A sneaker was identified from a photo as: ${desc}\n
+Find the matching product(s) and their manufacturer style codes. Answer with ONE JSON object only:
+{"candidates":[{"name":"","sku":"","brand":"","colorway":"","retail_price":number|null,"retail_currency":"EUR"|"USD"|null,"release_date":"YYYY-MM-DD"|null,"source_url":""}]}
+At most 4 candidates. Only include style codes that a page explicitly shows.`);
+  }
+};
+
+const PROMPT_LABEL = `You read photos of sneaker shoebox labels for a warehouse intake system. The exact manufacturer style code matters more than anything else: a wrong code books the wrong product.
+
+Rules
+- Transcribe exactly what is printed, character by character. Never guess, complete or "correct" a code from your memory of sneaker releases. If a character cannot be read, put "?" in its place.
+- style_code is the manufacturer's style / article number. It is NOT the barcode number, NOT a PO or order number, NOT a serial, factory or date code, NOT the size.
+  · Nike / Jordan: two letters + four digits + three-digit colour code, e.g. "DD1391-100" (older boxes: six digits + three, "315122-111"). Printed as "DD1391-100" or "DD1391 100", usually near the barcode.
+  · adidas / Yeezy: six characters, often after "ART" or in bold, e.g. "GW2871", "IE0421", "JI1234". Ignore "PO#", "#" serial numbers and factory codes such as "APE 779001".
+  · New Balance: e.g. "U9060BLK", "M990GL6", "BB550WT1", "ML2002RA". The width letter (D, B, 2E) is not part of it.
+  · ASICS: "1201A789-020" (printed with dot, dash or space between the parts).
+  · Puma: six digits + two digits, e.g. "374915 01".
+  · Converse "162050C" / "A04360C"; Vans starts with "VN0A"; Salomon "L41750800".
+  · Other brands: the value labelled Art., Art. No., Style, Style#, SKU, Ref. or Item.
+- style_code_alternatives: only when specific characters are visually ambiguous (0/O, 1/I, 5/S, 8/B, 2/Z, 6/G) list the other plausible readings; otherwise leave empty.
+- barcode_digits: the digits printed below the UPC/EAN barcode (12 or 13 digits), digits only. Leave empty unless every digit is legible.
+- Sizes: copy US, UK, EU (EUR/FR) and CM/JP exactly as printed, keeping fractions ("42 2/3", "40.5"). size_category from the label (MEN'S, WMNS/W, GS/Y, PS/C, TD).
+- model_text: the model line exactly as printed (e.g. "WMNS AIR FORCE 1 '07 LX"). colorway_text: the colour line exactly as printed.
+- Several box labels in one photo: one entry per label, reading order top-left to bottom-right.
+- No shoebox label visible: return an empty list and say why in image_problem.`;
+
+const S_STR = { type: 'string' };
+const TOOL_LABELS = {
+  name: 'report_labels', description: 'Report what is printed on each shoebox label in the photo.',
+  input_schema: {
+    type: 'object', required: ['labels'],
+    properties: {
+      labels: {
+        type: 'array', items: {
+          type: 'object', required: ['brand', 'style_code', 'confidence'],
+          properties: {
+            brand: S_STR, style_code: { type: 'string', description: 'Exactly as printed; "?" for unreadable characters.' },
+            style_code_alternatives: { type: 'array', items: S_STR },
+            model_text: S_STR, colorway_text: S_STR,
+            size_us: S_STR, size_uk: S_STR, size_eu: S_STR, size_cm: S_STR,
+            size_category: { type: 'string', enum: ['men', 'women', 'unisex', 'gs', 'ps', 'td', 'unknown'] },
+            barcode_digits: S_STR,
+            confidence: { type: 'string', enum: ['high', 'medium', 'low'], description: 'Confidence in style_code only.' },
+            notes: S_STR
+          }
+        }
+      },
+      image_problem: { type: 'string', description: 'Blur, glare, cropping etc. Empty if fine.' }
+    }
+  }
+};
+const PROMPT_REREAD = `You transcribe the manufacturer style code (style / article number) from a sneaker shoebox label. Work character by character from the image only. Do not use knowledge of sneaker releases to complete or correct it. It is not the barcode number, PO number, serial, size or factory code. Formats: Nike/Jordan "DD1391-100"; adidas "GW2871" (after ART); New Balance "U9060BLK"; ASICS "1201A789-020"; Puma "374915 01"; Converse "162050C"; Vans "VN0A…". If any character is unreadable set legible=false.`;
+const TOOL_REREAD = {
+  name: 'report_style_code', description: 'Report the transcribed style code.',
+  input_schema: { type: 'object', required: ['style_code', 'legible'], properties: { style_code: S_STR, legible: { type: 'boolean' } } }
+};
+const PROMPT_SHOE = `You identify sneakers from photos of the shoe itself (no label). Describe what is visible and give up to four candidate products, most likely first. For each candidate give a short search query (brand + model + colourway keywords) suitable for a product catalogue search. Do NOT output style codes or SKUs – they will be looked up in a catalogue. Be honest about uncertainty: colourways of the same model are easily confused.`;
+const TOOL_SHOE = {
+  name: 'report_candidates', description: 'Report candidate sneaker products for the photo.',
+  input_schema: {
+    type: 'object', required: ['brand', 'candidates'],
+    properties: {
+      brand: S_STR, model_family: S_STR, visible_colors: S_STR,
+      candidates: { type: 'array', items: { type: 'object', required: ['name', 'search_query'], properties: { name: S_STR, search_query: S_STR, why: S_STR, confidence: { type: 'string', enum: ['high', 'medium', 'low'] } } } }
+    }
+  }
+};
+const PROMPT_WEB = `You verify sneaker product data with web search. Report only what a source explicitly states. Never invent or complete style codes. Finish with exactly one JSON object and no other text after it.`;
+
+/* ---- Bildaufbereitung ---- */
+async function loadBitmap(file) {
+  try { return await createImageBitmap(file, { imageOrientation: 'from-image' }); } catch (e) {}
+  return new Promise((res, rej) => {
+    const url = URL.createObjectURL(file); const im = new Image();
+    im.onload = () => { URL.revokeObjectURL(url); res(im); }; im.onerror = () => { URL.revokeObjectURL(url); rej(new Error('Bildformat nicht lesbar')); };
+    im.src = url;
+  });
+}
+function drawScaled(src, max) {
+  const w = src.width || src.naturalWidth, h = src.height || src.naturalHeight;
+  const k = Math.min(1, max / Math.max(w, h));
+  const c = document.createElement('canvas'); c.width = Math.round(w * k); c.height = Math.round(h * k);
+  c.getContext('2d').drawImage(src, 0, 0, c.width, c.height);
+  return c;
+}
+async function fileToJpeg(file, max = 1600, q = 0.86) { return drawScaled(await loadBitmap(file), max).toDataURL('image/jpeg', q); }
+function dataUrlToImg(dataUrl) { return new Promise((res, rej) => { const im = new Image(); im.onload = () => res(im); im.onerror = rej; im.src = dataUrl; }); }
+async function shrink(dataUrl, max = 800, q = 0.7) { return drawScaled(await dataUrlToImg(dataUrl), max).toDataURL('image/jpeg', q); }
+/** Barcodes maschinell lesen, wo der Browser es kann (Chrome/Android); sonst leer. */
+async function detectBarcodes(dataUrl) {
+  if (!('BarcodeDetector' in window)) return [];
+  try {
+    const det = new BarcodeDetector({ formats: ['ean_13', 'upc_a', 'ean_8', 'upc_e'] });
+    const res = await det.detect(await dataUrlToImg(dataUrl));
+    return [...new Set(res.map(r => gtinClean(r.rawValue)).filter(gtinValid))];
+  } catch (e) { return []; }
+}
+
+/* ---- 04-stockx.js ---- */
+/* ================= StockX (offizielle API über die eigene Zwischenstation) ================= */
+function findImage(o, depth = 0) {
+  if (!o || depth > 4) return '';
+  if (typeof o === 'string') return /^https?:\/\/\S+\.(jpe?g|png|webp)(\?\S*)?$/i.test(o) || /^https?:\/\/images\.stockx\.com\//i.test(o) ? o : '';
+  if (typeof o !== 'object') return '';
+  for (const v of Object.values(o)) { const f = findImage(v, depth + 1); if (f) return f; }
+  return '';
+}
+const stripSize = s => normSize(String(s ?? '').replace(/^[A-Za-z' ]+/, ''));
+function normProduct(p) {
+  const a = p.productAttributes || {};
+  return {
+    pid: p.productId || p.id || '', url: p.urlKey ? 'https://stockx.com/' + p.urlKey : '', sku: p.styleId || '', title: p.title || p.productName || '',
+    brand: p.brand || '', type: p.productType || '', color: a.colorway || a.color || '', retail: a.retailPrice ?? null,
+    release: toISODate(a.releaseDate), gender: a.gender || '', img: findImage(p)
+  };
+}
+function normVariant(v) {
+  const sz = {};
+  for (const c of ((v.sizeChart && v.sizeChart.availableConversions) || [])) {
+    const t = String(c.type || '').toLowerCase(), val = stripSize(c.size);
+    if (/^eu/.test(t)) sz.eu = val; else if (/^uk/.test(t)) sz.uk = val; else if (/^(cm|jp)/.test(t)) sz.cm = val;
+    else if (/^us/.test(t)) { if (!sz.us || /us m/.test(t)) sz.us = val; if (/us w/.test(t)) sz.usw = val; }
+  }
+  return { vid: v.variantId || v.id || '', pid: v.productId || '', value: stripSize(v.variantValue), sz, gtins: (v.gtins || []).map(g => gtinClean(g.identifier || g)) };
+}
+const SX = {
+  on() { return workerOn() && S.settings.sxOn !== false; },
+  async get(path, params) {
+    const qs = params ? '?' + new URLSearchParams(params).toString() : '';
+    const r = await fetchT(workerBase() + '/sx/' + path + qs, { headers: { authorization: 'Bearer ' + S.settings.token } }, 25000);
+    if (r.status === 404) return null;
+    if (!r.ok) {
+      let j = {}; try { j = await r.json(); } catch (e) {}
+      if (r.status === 401 && j.code === 'app_token') throw new AppErr('Zwischenstation lehnt ab – App-Passwort prüfen.');
+      if (j.code === 'not_connected') throw new AppErr('StockX ist noch nicht verbunden (Einstellungen → „Mit StockX verbinden“).');
+      if (r.status === 429) throw new AppErr('StockX-Tageslimit erreicht.');
+      throw new AppErr('StockX-Fehler ' + r.status + (j.error ? ': ' + j.error : ''));
+    }
+    return r.json();
+  },
+  async search(q, n = 10) { const d = await this.get('search', { query: q, pageNumber: 1, pageSize: n }); return ((d && d.products) || []).map(normProduct); },
+  async product(pid) { const d = await this.get('products/' + encodeURIComponent(pid)); return d ? normProduct(d) : null; },
+  async variants(pid) { const d = await this.get('products/' + encodeURIComponent(pid) + '/variants'); return (Array.isArray(d) ? d : (d && d.variants) || []).map(normVariant); },
+  async gtin(g) {
+    for (const f of gtinForms(g)) { const d = await this.get('products/variants/gtins/' + f); if (d && (d.productId || d.variantId)) return normVariant(d); }
+    return null;
+  },
+  async market(pid, vid) {
+    const d = await this.get('products/' + pid + '/variants/' + vid + '/market-data', { currencyCode: 'EUR' });
+    if (!d) return null;
+    const m = d.standardMarketData || {};
+    const n = v => (v == null || v === '') ? null : Number(v);
+    return { bid: n(d.highestBidAmount ?? m.highestBidAmount), ask: n(d.lowestAskAmount ?? m.lowestAsk), cur: d.currencyCode || 'EUR', at: nowISO() };
+  }
+};
+
+/* ================= Prüfkette: aus Label-Rohdaten wird eine belegte SKU =================
+   Stufen: 0 ungeprüft · 1 plausibel · 2 bestätigt (Katalogtreffer) · 3 doppelt bestätigt (SKU + Barcode) */
+async function resolveSku(inp, opt = {}) {
+  const ev = [], f = {}, add = (ok, t, url) => ev.push({ ok, t, url });
+  let lvl = 0, sx = null, cands = [], conflict = false;
+  f.brand = normBrand(inp.brand) || guessBrandFromSku(inp.sku);
+  const rep = repairSku(f.brand, inp.sku);
+  f.sku = rep.sku;
+  if (rep.changed) add(null, `Lesefehler korrigiert: „${inp.sku}“ → „${f.sku}“ (an dieser Stelle steht bei ${f.brand} immer eine Ziffer bzw. ein Buchstabe)`);
+  if (/\?/.test(f.sku)) add(false, 'SKU nicht vollständig lesbar – bitte am Foto prüfen');
+  const fmt = f.sku ? validateSku(f.brand, f.sku) : null;
+  if (fmt === true) add(true, `SKU-Format passt zu ${f.brand}`);
+  else if (fmt === false) add(false, `SKU-Format untypisch für ${f.brand} (üblich: ${SKU_HINT[f.brand] || '–'})`);
+  if (inp.model) f.model = inp.model;
+  if (inp.color) f.color = inp.color;
+  if (inp.sizeEU) f.size = normSize(inp.sizeEU);
+  if (inp.sizeUS) f.sizeUS = normSize(inp.sizeUS);
+  if (inp.sizeUK) f.sizeUK = normSize(inp.sizeUK);
+  if (inp.sizeCM) f.sizeCM = normSize(inp.sizeCM);
+
+  let gt = gtinClean(inp.gtin);
+  if (gt) {
+    if (gtinValid(gt)) { f.gtin = gt; add(true, inp.gtSrc === 'scan' ? 'Barcode maschinell gelesen' : 'Barcode-Ziffern gelesen, Prüfziffer stimmt'); }
+    else { add(false, 'Barcode-Ziffern unvollständig oder falsch gelesen (Prüfziffer passt nicht) – wird ignoriert'); gt = ''; }
+  }
+  const key = skuKey(f.sku);
+  const fill = p => {
+    if (p.title) f.name = p.title;
+    if (p.brand) f.brand = normBrand(p.brand) || f.brand;
+    if (p.color && !f.color) f.color = p.color;
+    if (p.retail != null && p.retail !== '') { f.retail = num(p.retail); f.retailCur = p.retailCur || 'USD'; }
+    if (p.release) f.releaseDate = p.release;
+  };
+
+  /* 1) Eigener Katalog: schon einmal bestätigt erfasst */
+  const own = key && S.catalog[key];
+  if (own && own.lvl >= 2) {
+    fill({ title: own.name, brand: own.brand, color: own.color, retail: own.retail, retailCur: own.retailCur, release: own.release });
+    if (own.model && !f.model) f.model = own.model;
+    sx = own.sx ? { ...own.sx, vid: '' } : null;
+    lvl = 2; add(true, `Bereits im eigenen Katalog bestätigt (${own.n || 1}× erfasst)`);
+    const known = gt && own.gt && own.gt[gtinCore(gt)];
+    if (known) { lvl = 3; add(true, 'Barcode ist für diese SKU bereits bekannt'); if (sx && known.vid) sx.vid = known.vid; }
+  }
+
+  /* 2) StockX */
+  if (SX.on() && !opt.noSx && (lvl < 3)) {
+    try {
+      let match = [], prod = null, variant = null;
+      if (lvl < 2 && key && !/\?/.test(f.sku)) {
+        const hit = async q => (await SX.search(q, 10)).filter(p => styleKeys(p.sku).includes(skuKey(q)));
+        match = await hit(f.sku);
+        if (!match.length) {
+          const alts = [...new Set([...(inp.alts || []).map(a => repairSku(f.brand, a).sku), ...skuVariants(f.sku, 4)])].filter(a => a && skuKey(a) !== key).slice(0, 5);
+          for (const a of alts) {
+            const m = await hit(a);
+            if (m.length) { add(null, `SKU laut StockX: „${canonSku(f.brand, m[0].sku.split('/')[0])}“ (gelesen: „${f.sku}“ – verwechselbares Zeichen)`); f.sku = canonSku(f.brand, a); match = m; break; }
+          }
+        }
+      }
+      if (gt) {
+        variant = await SX.gtin(gt);
+        if (variant) {
+          const byG = match.find(p => p.pid === variant.pid) || (sx && sx.pid === variant.pid ? { pid: sx.pid, own: true } : null) || await SX.product(variant.pid);
+          if (byG && byG.own) { lvl = 3; add(true, 'StockX: Barcode gehört zu dieser SKU'); }
+          else if (byG && (match.some(p => p.pid === byG.pid) || styleKeys(byG.sku).includes(skuKey(f.sku)))) { prod = byG; lvl = 3; add(true, `StockX: SKU gefunden – ${byG.title}`); add(true, 'StockX: Barcode gehört zu genau dieser SKU'); }
+          else if (byG) {
+            const read = f.sku, gsku = canonSku(byG.brand, String(byG.sku).split('/')[0]);
+            prod = byG; f.sku = gsku;
+            if (!read) { lvl = 2; add(true, `SKU über den Barcode ermittelt: ${gsku} – ${byG.title}`); }
+            else if (match.length || lvl >= 2) { conflict = true; lvl = 1; cands = [byG, ...match]; add(false, `Widerspruch: Der Barcode gehört laut StockX zu „${gsku}“ (${byG.title}), auf dem Label gelesen wurde „${read}“ (${match[0] ? match[0].title : (own && own.name) || 'im eigenen Katalog'}). Bitte am Foto prüfen und den richtigen Treffer wählen.`); }
+            else if (nearSku(read, gsku)) { lvl = 2; add(null, `Lesefehler korrigiert: Barcode gehört laut StockX zu „${gsku}“ (gelesen: „${read}“)`); }
+            else { conflict = true; lvl = 1; cands = [byG]; add(false, `Die gelesene SKU „${read}“ kennt StockX nicht; der Barcode gehört zu „${gsku}“ (${byG.title}). Bitte am Foto prüfen.`); }
+          }
+        } else add(null, 'Barcode ist bei StockX nicht hinterlegt');
+      }
+      if (!prod && match.length && lvl < 2) {
+        prod = match[0]; lvl = 2; add(true, `StockX: SKU gefunden – ${prod.title}`);
+        if (match.length > 1) { cands = match; add(null, `${match.length} StockX-Einträge mit dieser SKU – bitte den passenden wählen`); }
+      }
+      if (!prod && !variant && lvl < 2 && key) add(false, 'Bei StockX nicht gefunden');
+      if (prod) {
+        fill({ ...prod, retailCur: 'USD' });
+        sx = { pid: prod.pid, url: prod.url, img: prod.img, title: prod.title, vid: '' };
+      }
+      /* Größe/Variante */
+      if (sx && sx.pid) {
+        if (!variant && (f.size || f.sizeUS)) {
+          try {
+            const vs = await SX.variants(sx.pid);
+            variant = vs.find(v => f.sizeUS && (v.sz.us === f.sizeUS || v.sz.usw === f.sizeUS || v.value === f.sizeUS) && (!f.size || !v.sz.eu || sizeVal(v.sz.eu) === sizeVal(f.size)))
+              || vs.find(v => f.size && v.sz.eu && sizeVal(v.sz.eu) === sizeVal(f.size)) || null;
+          } catch (e) {}
+        }
+        if (variant) {
+          sx.vid = variant.vid;
+          if (f.size && variant.sz.eu && sizeVal(variant.sz.eu) !== sizeVal(f.size)) add(false, `Größe prüfen: Label EU ${f.size}, StockX-Variante EU ${variant.sz.eu}`);
+          else if (variant.sz.eu || variant.sz.us) add(true, `Größe passt zur StockX-Variante (EU ${variant.sz.eu || '–'} / US ${variant.sz.us || variant.value || '–'})`);
+          if (!f.size && variant.sz.eu) f.size = variant.sz.eu;
+          if (!f.sizeUS && (variant.sz.us || variant.value)) f.sizeUS = variant.sz.us || variant.value;
+          if (!f.sizeUK && variant.sz.uk) f.sizeUK = variant.sz.uk;
+        }
+      }
+    } catch (e) { add(null, 'StockX-Prüfung nicht möglich: ' + errMsg(e)); }
+  } else if (!SX.on() && lvl < 2) add(null, 'StockX ist nicht angebunden – keine Katalogprüfung');
+
+  return { f, ev, lvl, sx, cands, conflict };
+}
+
+/** Ersatzweg ohne StockX: Websuche bestätigt, dass es die SKU gibt. */
+async function webConfirm(r, hint) {
+  try {
+    const w = await AI.webSku(r.f.sku, r.f.brand, hint || r.f.model || '');
+    if (w && w.found && skuKey(w.sku) === skuKey(r.f.sku)) {
+      if (w.name && !r.f.name) r.f.name = w.name;
+      if (w.brand && !r.f.brand) r.f.brand = normBrand(w.brand);
+      if (w.colorway && !r.f.color) r.f.color = w.colorway;
+      if (w.retail_price != null && r.f.retail == null) { r.f.retail = num(w.retail_price); r.f.retailCur = w.retail_currency === 'EUR' ? 'EUR' : 'USD'; }
+      if (w.release_date && !r.f.releaseDate) r.f.releaseDate = toISODate(w.release_date);
+      r.ev.push({ ok: true, t: 'Websuche: SKU existiert – ' + (w.name || ''), url: /^https?:\/\//.test(w.source_url || '') ? w.source_url : '' });
+      r.lvl = Math.max(r.lvl, 1);
+    } else if (w && w.found && w.sku) r.ev.push({ ok: false, t: `Websuche fand nur eine abweichende SKU („${w.sku}“ – ${w.name || ''})` });
+    else r.ev.push({ ok: false, t: 'Websuche konnte die SKU nicht bestätigen' });
+  } catch (e) { r.ev.push({ ok: null, t: 'Websuche nicht möglich: ' + errMsg(e) }); }
+  return r;
+}
+
+/** Bestätigte SKU im eigenen Katalog merken – beschleunigt und sichert jede weitere Erfassung. */
+function rememberCatalog(it) {
+  const key = skuKey(it.sku); if (!key) return;
+  if (!it.ver || !(it.ver.lvl >= 2 || it.ver.user)) return; // nur belegte oder ausdrücklich am Label geprüfte SKUs
+  const lvl = Math.max(it.ver.lvl || 0, 2);
+  const c = S.catalog[key] || { n: 0, gt: {} };
+  Object.assign(c, { sku: it.sku, brand: it.brand, name: it.name, model: it.model || c.model || '', color: it.color || c.color || '',
+    retail: it.retail !== '' && it.retail != null ? it.retail : c.retail, retailCur: it.retailCur || c.retailCur, release: it.releaseDate || c.release || '',
+    sx: it.sx && it.sx.pid ? { pid: it.sx.pid, url: it.sx.url, img: it.sx.img, title: it.sx.title } : (c.sx || null), lvl, at: nowISO() });
+  c.n = (c.n || 0) + 1;
+  if (it.gtin && gtinValid(it.gtin)) { c.gt = c.gt || {}; c.gt[gtinCore(it.gtin)] = { eu: it.size, us: it.sizeUS || '', vid: (it.sx && it.sx.vid) || '' }; }
+  S.catalog[key] = c;
+}
+
+/* ---- 05-capture.js ---- */
+/* ================= Erfassen ================= */
+const WORK = { running: 0, queue: [] };
+const draftById = id => S.drafts.find(d => d.id === id);
+function newDraft(src) { return { id: uid(), at: nowISO(), src, st: 'queued', f: {}, ev: [], lvl: 0, cands: [], touched: {}, err: '', sx: null }; }
+
+async function addPhotos(files, src) {
+  if (!files.length) return;
+  if (!AI.ready()) { toast('KI ist nicht eingerichtet – bitte zuerst in den Einstellungen.', 'bad'); return; }
+  for (const file of files) {
+    try {
+      const jpg = await fileToJpeg(file, 1600, 0.86);
+      const d = newDraft(src);
+      await DB.put('img', 'w:' + d.id, jpg);
+      S.drafts.unshift(d); enqueue(d.id);
+    } catch (e) { toast('Bild nicht lesbar: ' + (file.name || ''), 'bad'); }
+  }
+  save('drafts'); if (S.ui.view !== 'capture') go('capture'); else renderInbox();
+}
+function enqueue(id) { WORK.queue.push(id); pump(); }
+function pump() {
+  while (WORK.running < 2 && WORK.queue.length) {
+    const id = WORK.queue.shift(); WORK.running++;
+    processDraft(id).catch(e => console.error(e)).finally(() => { WORK.running--; pump(); });
+  }
+}
+function draftChanged(d) { save('drafts'); renderInbox(); refreshReview(d.id); }
+
+async function processDraft(id) {
+  const d = draftById(id); if (!d) return;
+  try {
+    const img = await DB.get('img', 'w:' + id);
+    if (!img) throw new AppErr('Foto nicht mehr vorhanden – bitte neu aufnehmen.');
+    d.st = 'reading'; d.err = ''; draftChanged(d);
+    if (d.src === 'shoe') return await processShoe(d, img);
+    const [labels, codes] = await Promise.all([AI.readLabels(img), detectBarcodes(img)]);
+    const all = [d];
+    for (let i = 1; i < labels.length; i++) {
+      const x = newDraft('label'); x.st = 'reading'; x.multi = i + 1;
+      await DB.put('img', 'w:' + x.id, img);
+      S.drafts.splice(S.drafts.indexOf(d) + i, 0, x); all.push(x);
+    }
+    if (labels.length > 1) d.multi = 1;
+    await Promise.all(all.map((x, i) => resolveLabelDraft(x, labels[i], codes, img, labels.length).catch(e => { x.st = 'error'; x.err = errMsg(e); draftChanged(x); })));
+  } catch (e) { d.st = 'error'; d.err = errMsg(e); draftChanged(d); }
+}
+
+async function resolveLabelDraft(x, L, codes, img, n) {
+  x.raw = L; x.st = 'resolving'; draftChanged(x);
+  let gt = gtinClean(L.barcode_digits), gtSrc = 'ki';
+  if (codes.length === 1 && n === 1) { gt = codes[0]; gtSrc = 'scan'; }
+  else if (codes.some(c => sameGtin(c, gt))) gtSrc = 'scan';
+  const inp = { sku: L.style_code || '', alts: L.style_code_alternatives || [], brand: L.brand, gtin: gt, gtSrc, model: L.model_text, color: L.colorway_text,
+    sizeEU: L.size_eu, sizeUS: L.size_us, sizeUK: L.size_uk, sizeCM: L.size_cm };
+  let r = await resolveSku(inp);
+  if (L.confidence === 'low' && r.lvl < 2) r.ev.push({ ok: false, t: 'KI ist sich bei der SKU unsicher' + (L.notes ? ': ' + L.notes : '') });
+  /* Zweite Lesung, wenn kein Katalog die SKU belegt */
+  if (r.lvl < 2 && !r.conflict && S.settings.doubleRead && n === 1 && skuKey(r.f.sku)) {
+    try {
+      const s2 = repairSku(r.f.brand, await AI.rereadSku(img)).sku;
+      if (s2 && skuKey(s2) === skuKey(r.f.sku)) { r.ev.push({ ok: true, t: 'Zweite, unabhängige Lesung stimmt überein' }); r.lvl = Math.max(r.lvl, 1); }
+      else if (s2) {
+        const r2 = SX.on() ? await resolveSku({ ...inp, sku: s2, alts: [] }) : null;
+        if (r2 && r2.lvl >= 2) { r2.ev.unshift({ ok: null, t: `Erste Lesung „${r.f.sku}“ verworfen – die zweite Lesung „${s2}“ wurde im Katalog bestätigt` }); r = r2; }
+        else { r.ev.push({ ok: false, t: `Zwei Lesungen weichen voneinander ab: „${r.f.sku}“ und „${s2}“ – bitte am Foto prüfen` }); r.alt = s2; r.lvl = 0; }
+      }
+    } catch (e) { r.ev.push({ ok: null, t: 'Zweite Lesung nicht möglich: ' + errMsg(e) }); }
+  }
+  if (r.lvl < 2 && !r.conflict && S.settings.webLookup && skuKey(r.f.sku) && !/\?/.test(r.f.sku)) r = await webConfirm(r, L.model_text);
+  applyResolve(x, r);
+  x.st = 'ready'; draftChanged(x);
+}
+function applyResolve(d, r) {
+  for (const [k, v] of Object.entries(r.f)) if (!d.touched[k] && v !== '' && v != null) d.f[k] = v;
+  d.ev = r.ev; d.lvl = r.lvl; d.cands = r.cands || []; d.sx = r.sx || null; d.alt = r.alt || ''; d.verSku = d.f.sku || '';
+}
+
+async function processShoe(d, img) {
+  const res = await AI.identifyShoe(img);
+  d.raw = res; d.st = 'resolving'; draftChanged(d);
+  let cands = [];
+  if (SX.on()) {
+    for (const c of res.candidates.slice(0, 3)) {
+      try {
+        (await SX.search(c.search_query || c.name, 5)).forEach(p => { if (!cands.some(x => x.pid === p.pid)) cands.push(p); });
+      } catch (e) { d.ev.push({ ok: null, t: 'StockX-Suche nicht möglich: ' + errMsg(e) }); break; }
+    }
+  }
+  if (!cands.length && S.settings.webLookup) {
+    try {
+      const w = await AI.webShoe(res.candidates.slice(0, 3).map(c => c.name).join(' / ') + (res.visible_colors ? ' – colours: ' + res.visible_colors : ''));
+      cands = ((w && w.candidates) || []).filter(c => c.sku).map(c => ({ pid: '', url: /^https?:/.test(c.source_url || '') ? c.source_url : '', sku: c.sku, title: c.name, brand: c.brand, color: c.colorway, retail: c.retail_price, retailCur: c.retail_currency, release: toISODate(c.release_date), img: '' }));
+    } catch (e) { d.ev.push({ ok: null, t: 'Websuche nicht möglich: ' + errMsg(e) }); }
+  }
+  d.cands = cands.slice(0, 8); d.f.brand = normBrand(res.brand); d.lvl = 0;
+  d.ev.unshift({ ok: null, t: `Schuh-Foto: KI vermutet „${res.candidates[0].name}“. Bitte den passenden Treffer wählen. Größe und Barcode stehen nur auf dem Karton-Label.` });
+  if (!cands.length) d.ev.push({ ok: false, t: 'Keine Katalogtreffer – SKU bitte von Hand eintragen' });
+  d.st = 'ready'; draftChanged(d);
+}
+
+/* ---- Ansicht ---- */
+const ICO_CAM = '<svg viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>';
+VIEWS.capture = () => {
+  const b = S.settings.batch || {};
+  const setB = Object.values(b).filter(v => v !== '' && v != null && v !== false).length;
+  return `
+  ${!AI.ready() ? `<div class="banner warn"><div class="grow"><b>KI-Zugang fehlt.</b> Für das Auslesen der Labels wird ein Anthropic-API-Key gebraucht.</div><button class="btn sm dark" data-act="nav" data-view="settings">Einrichten</button></div>` : ''}
+  ${legacyBanner()}
+  <div class="cap">
+    <button class="btn pri" data-act="pick" data-file="fCam">${ICO_CAM}Label fotografieren<small>Karton-Label formatfüllend, Barcode mit im Bild</small></button>
+    <button class="btn" data-act="pick" data-file="fGal">Fotos wählen<small>mehrere auf einmal</small></button>
+    <button class="btn" data-act="manualNew">SKU eintippen<small>ohne Foto</small></button>
+    <button class="btn ghost" data-act="pick" data-file="fShoe" style="grid-column:1/-1;flex-direction:row;padding:10px">Kein Label da? Schuh-Foto erkennen</button>
+  </div>
+  <details class="card" id="batchBox" ${S.ui.batchOpen ? 'open' : ''}>
+    <summary>Stapel-Vorgaben ${setB ? `<span class="tag ok">${setB} gesetzt</span>` : '<span class="note">für alle Paare einer Lieferung</span>'}</summary>
+    <div class="form" data-batch>
+      ${fld('dealer', 'Händler', b.dealer || '', { chips: S.lists.dealers })}
+      ${fld('location', 'Lagerort', b.location || '', { chips: S.lists.locations })}
+      ${fld('buyPrice', 'Einkaufspreis €', b.buyPrice ?? '', { dec: 1, w: 'h' })}
+      ${fld('buyVat', 'inkl. MwSt', b.buyVat, { check: 1, w: 'h' })}
+      ${fld('orderNo', 'Bestellnummer', b.orderNo || '', { w: 'h' })}
+      ${fld('buyDate', 'Kaufdatum', b.buyDate || '', { date: 1, w: 'h' })}
+      ${fld('invoiceDate', 'Rechnungsdatum', b.invoiceDate || '', { date: 1, w: 'h' })}
+      ${fld('deliveryDate', 'Lieferdatum', b.deliveryDate || '', { date: 1, w: 'h' })}
+    </div>
+    <div class="row" style="margin-top:10px"><span class="note grow">Wird in jede neue Erfassung vorausgefüllt, bis du es leerst.</span><button class="btn sm ghost" data-act="batchClear">Leeren</button></div>
+  </details>
+  <div id="inbox">${inboxHTML()}</div>`;
+};
+const ST_TAG = {
+  queued: ['busy', 'Wartet'], reading: ['busy', 'Lese Label …'], resolving: ['busy', 'Prüfe SKU …'], error: ['bad', 'Fehler']
+};
+function inboxHTML() {
+  const head = `<h2>Eingang <span class="n">${S.drafts.length}</span><span class="sp"></span>${S.drafts.some(d => d.st === 'ready' && d.lvl >= 2) ? '<button class="btn sm ghost" data-act="saveAllReady">Alle bestätigten buchen</button>' : ''}</h2>`;
+  if (!S.drafts.length) return head + `<div class="empty">Noch nichts im Eingang.<br>Fotografiere die Label deiner Kartons – mehrere hintereinander sind kein Problem, die Prüfung läuft im Hintergrund.</div>`;
+  return head + S.drafts.map(d => {
+    const f = d.f || {};
+    const tag = d.st === 'ready' ? `<span class="tag ${d.lvl >= 2 ? 'ok' : d.lvl === 1 ? 'warn' : 'bad'}">${LVL_TXT[d.lvl]}</span>` : `<span class="tag ${ST_TAG[d.st][0]}">${ST_TAG[d.st][1]}</span>`;
+    return `<button class="it" data-act="openDraft" data-id="${d.id}">
+      <span class="th" data-thumb="w:${d.id}">${d.src === 'manual' ? 'SKU' : ''}</span>
+      <span class="mid"><span class="t">${esc(f.name || f.model || (d.st === 'error' ? d.err : d.src === 'shoe' ? 'Schuh-Foto' : 'Label') )}</span>
+        <span class="s">${f.sku ? `<span class="sku">${esc(f.sku)}</span>` : ''}${f.size ? `<span class="sz">EU ${esc(f.size)}</span>` : ''}${d.multi ? `<span class="tag">Label ${d.multi}</span>` : ''}${tag}</span></span>
+    </button>`;
+  }).join('');
+}
+function renderInbox() {
+  updateDots();
+  const box = $('#inbox'); if (!box || S.ui.view !== 'capture') return;
+  box.innerHTML = inboxHTML();
+  hydrateThumbs(box);
+}
+AFTER.capture = () => hydrateThumbs($('#view'));
+async function hydrateThumbs(root) {
+  for (const el of $$('[data-thumb]', root)) {
+    const key = el.dataset.thumb; el.removeAttribute('data-thumb');
+    try { const src = await DB.get('img', key); if (src) el.innerHTML = `<img src="${src}" alt="">`; } catch (e) {}
+  }
+}
+INP.batch = () => {
+  const box = $('[data-batch]'); if (!box) return;
+  const v = readForm(box);
+  S.settings.batch = { ...v, buyPrice: v.buyPrice === '' ? '' : r2(num(v.buyPrice)) }; save('settings');
+};
+ACT.batchClear = () => { S.settings.batch = {}; S.ui.batchOpen = true; save('settings'); render(); };
+ACT.pick = el => { const inp = $('#' + el.dataset.file); inp.value = ''; inp.click(); };
+ACT.manualNew = () => { const d = newDraft('manual'); d.st = 'ready'; d.ev = [{ ok: null, t: 'Von Hand angelegt – SKU eintragen und „Prüfen“ tippen' }]; S.drafts.unshift(d); save('drafts'); renderInbox(); openReview(d.id); };
+
+/* ---- Prüfen & Buchen ---- */
+function draftValues(d) {
+  const b = S.settings.batch || {}, last = S.meta.last || {};
+  const v = { ...d.f };
+  for (const k of ['dealer', 'location', 'buyPrice', 'orderNo', 'buyDate', 'invoiceDate', 'deliveryDate']) if ((v[k] === undefined || v[k] === '') && b[k] !== undefined && b[k] !== '') v[k] = b[k];
+  if (v.buyVat === undefined) v.buyVat = b.buyVat !== undefined && b.buyVat !== '' ? !!b.buyVat : !!last.buyVat;
+  if (!v.location && last.location) v.location = last.location;
+  if (!v.buyDate) v.buyDate = today();
+  return v;
+}
+function reviewBody(d) {
+  const busy = d.st !== 'ready' && d.st !== 'error';
+  const v = draftValues(d);
+  return `
+    ${d.src !== 'manual' ? `<img class="shot" data-act="zoom" data-key="w:${d.id}" data-shot="w:${d.id}" alt="Foto">` : ''}
+    ${d.src !== 'manual' ? '<div class="note" style="margin:4px 0 10px">Antippen zum Vergrößern</div>' : ''}
+    ${d.st === 'error' ? `<div class="banner bad"><div class="grow">${esc(d.err)}</div><button class="btn sm" data-act="retryDraft">Erneut lesen</button></div>` : ''}
+    ${busy ? `<div class="banner info"><span class="tag busy">${ST_TAG[d.st][1]}</span><span class="grow">Die Felder füllen sich gleich von selbst.</span></div>` : ''}
+    ${!busy && d.st !== 'error' ? `<div class="card tight">${evHTML(d.lvl, d.ev)}
+        ${d.alt ? `<div class="row" style="margin-top:8px"><span class="note">Andere Lesung übernehmen:</span><button class="btn sm" data-act="useAlt">${esc(d.alt)}</button></div>` : ''}</div>` : ''}
+    ${(d.cands || []).length ? `<div class="lbl" style="margin-top:12px">Treffer wählen</div>${d.cands.map((c, i) => `<button class="cand ${d.sx && c.pid && d.sx.pid === c.pid ? 'on' : ''}" data-act="pickCand" data-i="${i}">
+        ${c.img ? `<img src="${esc(c.img)}" alt="" loading="lazy" onerror="this.remove()">` : ''}<span class="mid"><b>${esc(c.title)}</b><br><span class="sku">${esc(c.sku)}</span> <span class="note">${esc(c.color || '')}</span></span></button>`).join('')}` : ''}
+    <div style="height:10px"></div>
+    <div data-form>${itemFormHTML(v, { qty: true })}</div>
+    <div class="row" style="margin-top:12px">
+      <button class="btn sm" data-act="recheck" ${busy ? 'disabled' : ''}>SKU erneut prüfen</button>
+      ${d.sx && d.sx.url ? `<a class="btn sm ghost" href="${esc(d.sx.url)}" target="_blank" rel="noopener">Bei StockX ansehen</a>` : (v.sku ? `<a class="btn sm ghost" href="https://stockx.com/search?s=${encodeURIComponent(v.sku)}" target="_blank" rel="noopener">StockX-Suche</a>` : '')}
+    </div>`;
+}
+function openReview(id) {
+  const d = draftById(id); if (!d) return;
+  const el = sheet({ title: d.src === 'shoe' ? 'Schuh-Foto zuordnen' : 'Erfassung prüfen', body: reviewBody(d), data: { draft: id },
+    foot: `<button class="btn bad" style="flex:0 0 auto" data-act="dropDraft">Verwerfen</button><button class="btn pri" data-act="saveDraft">Buchen &amp; weiter</button>` });
+  hydrateShot(el);
+}
+async function hydrateShot(root) { for (const im of $$('[data-shot]', root)) { const src = await DB.get('img', im.dataset.shot); if (src) im.src = src; else im.remove(); } }
+function refreshReview(id) {
+  const el = $(`.sheet[data-draft="${id}"]`); if (!el) return;
+  const d = draftById(id); if (!d) return closeSheet(el);
+  const body = $('.sheet-body', el), top = body.scrollTop;
+  body.innerHTML = reviewBody(d); body.scrollTop = top; hydrateShot(el);
+}
+const sheetDraft = el => { const sh = el.closest('.sheet'); return sh ? draftById(sh.dataset.draft) : null; };
+INP.draft = (el) => {
+  const sh = el.closest('.sheet[data-draft]'); if (!sh || !el.dataset.f) return;
+  const d = draftById(sh.dataset.draft); if (!d) return;
+  d.f[el.dataset.f] = el.type === 'checkbox' ? el.checked : el.value.trim(); d.touched[el.dataset.f] = 1; save('drafts');
+};
+ACT.openDraft = el => openReview(el.dataset.id);
+ACT.zoom = async el => {
+  const src = el.src || await DB.get('img', el.dataset.key); if (!src) return;
+  const z = document.createElement('div'); z.className = 'zoom'; z.innerHTML = `<button aria-label="Schließen">×</button><img src="${src}" alt="">`;
+  z.addEventListener('click', e => { if (e.target.tagName === 'BUTTON') z.remove(); });
+  document.body.appendChild(z);
+};
+ACT.retryDraft = el => { const d = sheetDraft(el); if (d) { d.st = 'queued'; d.err = ''; d.ev = []; draftChanged(d); enqueue(d.id); } };
+ACT.useAlt = el => { const d = sheetDraft(el); if (!d) return; d.f.sku = d.alt; delete d.touched.sku; d.alt = ''; recheckDraft(d); };
+ACT.recheck = el => { const d = sheetDraft(el); if (d) { Object.assign(d.f, readForm($('[data-form]', el.closest('.sheet')))); recheckDraft(d); } };
+async function recheckDraft(d) {
+  if (!skuKey(d.f.sku) && !gtinClean(d.f.gtin)) { toast('Bitte zuerst eine SKU oder einen Barcode eintragen.', 'bad'); return; }
+  d.st = 'resolving'; draftChanged(d);
+  try {
+    let r = await resolveSku({ sku: d.f.sku, brand: d.f.brand, gtin: d.f.gtin, gtSrc: 'ki', sizeEU: d.f.size, sizeUS: d.f.sizeUS, sizeUK: d.f.sizeUK, model: d.f.model, color: d.f.color });
+    if (r.lvl < 2 && S.settings.webLookup && AI.ready() && skuKey(r.f.sku)) r = await webConfirm(r, d.f.model || d.f.name);
+    const keep = d.touched; d.touched = { ...keep }; delete d.touched.sku; delete d.touched.brand;
+    applyResolve(d, r);
+  } catch (e) { d.ev = [{ ok: false, t: errMsg(e) }]; }
+  d.st = 'ready'; draftChanged(d);
+}
+ACT.pickCand = el => {
+  const d = sheetDraft(el); if (!d) return; const c = d.cands[+el.dataset.i]; if (!c) return;
+  Object.assign(d.f, { sku: canonSku(c.brand, String(c.sku).split('/')[0]), name: c.title, brand: normBrand(c.brand) || d.f.brand || '', color: c.color || d.f.color || '' });
+  if (c.retail != null && c.retail !== '') { d.f.retail = num(c.retail); d.f.retailCur = c.retailCur || 'USD'; }
+  if (c.release) d.f.releaseDate = c.release;
+  d.sx = c.pid ? { pid: c.pid, url: c.url, img: c.img, title: c.title, vid: '' } : null; d.verSku = d.f.sku;
+  if (d.src === 'shoe') { d.lvl = 1; d.ev = [{ ok: null, t: 'Per Schuh-Foto zugeordnet und von dir ausgewählt – nicht durch ein Label belegt' }, { ok: !!c.pid, t: c.pid ? 'SKU stammt aus dem StockX-Katalog' : 'SKU stammt aus der Websuche' }]; }
+  else { d.lvl = c.pid ? 2 : 1; d.ev.push({ ok: true, t: `Treffer von dir gewählt: ${c.title}` }); }
+  draftChanged(d);
+};
+ACT.dropDraft = async el => {
+  const d = sheetDraft(el); if (!d) return;
+  if (!(await ask('Diese Erfassung verwerfen?', { ok: 'Verwerfen', danger: true }))) return;
+  await removeDraft(d); closeSheet($(`.sheet[data-draft="${d.id}"]`)); renderInbox();
+};
+async function removeDraft(d) { S.drafts = S.drafts.filter(x => x !== d); save('drafts'); try { await DB.del('img', 'w:' + d.id); } catch (e) {} }
+
+ACT.saveDraft = async el => {
+  const sh = el.closest('.sheet'), d = draftById(sh.dataset.draft); if (!d) return;
+  if (d.st !== 'ready' && d.st !== 'error') { toast('Prüfung läuft noch – einen Moment.'); return; }
+  const raw = readForm($('[data-form]', sh));
+  const { v, missing } = cleanItemFields(raw);
+  markMissing(sh, missing);
+  if (missing.length) { toast('Es fehlt: ' + missing.map(m => m.l).join(', '), 'bad'); return; }
+  let user = false;
+  const changed = skuKey(v.sku) !== skuKey(d.verSku) && d.lvl >= 1, lvl = changed ? 0 : d.lvl;
+  if (lvl < 2) {
+    const ok = await ask(`Die SKU <b>${esc(v.sku)}</b> ist nicht durch einen Katalog belegt (${changed ? 'nach der Prüfung von Hand geändert' : LVL_TXT[lvl]}).<br><br>Hast du sie Zeichen für Zeichen mit dem Label verglichen?`, { ok: 'Ja, stimmt – buchen', cancel: 'Nochmal ansehen', html: true });
+    if (!ok) return; user = true;
+  }
+  if (changed) { d.lvl = 0; d.ev = [{ ok: null, t: 'SKU nach der Prüfung von Hand geändert' }]; d.sx = null; }
+  const n = await commitDraft(d, v, user);
+  closeSheet(sh); toast(n > 1 ? `${n} Paare gebucht` : 'Gebucht: ' + v.sku + ' · EU ' + v.size, 'ok');
+  renderInbox();
+  const next = S.drafts.find(x => x.st === 'ready'); if (next) openReview(next.id);
+};
+async function commitDraft(d, v, user) {
+  const qty = Math.min(50, Math.max(1, parseInt(v.qty, 10) || 1)); delete v.qty;
+  let thumbKey = '';
+  if (S.settings.keepPhoto && d.src !== 'manual') {
+    try { const w = await DB.get('img', 'w:' + d.id); if (w) { thumbKey = 't:' + uid(); await DB.put('img', thumbKey, await shrink(w, 900, 0.72)); } } catch (e) {}
+  }
+  const ts = nowISO();
+  for (let i = 0; i < qty; i++) {
+    const it = { id: uid(), ...v, status: 'stock', createdAt: ts, updatedAt: ts, thumb: thumbKey,
+      sx: d.sx ? { ...d.sx } : null, ver: { lvl: d.lvl, ev: d.ev, src: d.src, user: !!user } };
+    S.items.unshift(it);
+    if (i === 0) rememberCatalog(it);
+  }
+  addToList('locations', v.location); addToList('dealers', v.dealer);
+  S.meta.last = { location: v.location, buyVat: !!v.buyVat };
+  await removeDraft(d);
+  save('items', 'catalog', 'meta');
+  return qty;
+}
+ACT.saveAllReady = async () => {
+  const ready = S.drafts.filter(d => d.st === 'ready' && d.lvl >= 2);
+  const ok = [], open = [];
+  for (const d of ready) { const { v, missing } = cleanItemFields({ ...draftValues(d), qty: '1' }); (missing.length ? open : ok).push({ d, v }); }
+  if (!ok.length) { toast('Bei allen fehlen noch Pflichtangaben (z. B. Preis oder Lagerort) – Stapel-Vorgaben setzen.', 'bad'); return; }
+  if (!(await ask(`${ok.length} bestätigte Erfassung(en) jetzt buchen?${open.length ? ` ${open.length} weitere brauchen noch Angaben.` : ''}`, { ok: 'Buchen' }))) return;
+  for (const { d, v } of ok) await commitDraft(d, v, false);
+  toast(ok.length + ' gebucht', 'ok'); render();
+};
+function updateDots() {
+  const c = $('#dotCap'), n = S.drafts.length; if (c) { c.textContent = n; c.classList.toggle('hide', !n); }
+  const r = $('#dotRet'); if (r) { const m = live(S.items).filter(it => { const l = retLeft(it); return (l != null && l <= 3) || refundDue(it); }).length; r.textContent = m; r.classList.toggle('hide', !m); }
+}
+
+/* ---- 06-inventory.js ---- */
+/* ================= Bestand ================= */
+const STATUS_TXT = { stock: 'Im Bestand', sold: 'Verkauft', returned: 'Retourniert' };
+function matchQ(it, q) {
+  const hay = [it.name, it.model, it.brand, it.color, it.location, it.dealer, it.orderNo, it.size, it.gtin, it.note].join(' ').toLowerCase(), key = skuKey(it.sku);
+  return q.toLowerCase().split(/\s+/).filter(Boolean).every(w => (skuKey(w) && key.includes(skuKey(w))) || hay.includes(w) || normSize(w) === it.size);
+}
+function invFiltered() {
+  const u = S.ui.inv, q = u.q.trim();
+  let list = live(S.items).filter(it => (u.status === 'all' || it.status === u.status) && (!u.loc || it.location === u.loc) && (!u.brand || it.brand === u.brand) && (!q || matchQ(it, q)));
+  const by = {
+    new: (a, b) => (b.createdAt || '').localeCompare(a.createdAt || ''),
+    old: (a, b) => (a.buyDate || a.createdAt || '').localeCompare(b.buyDate || b.createdAt || ''),
+    sku: (a, b) => a.sku.localeCompare(b.sku) || sizeVal(a.size) - sizeVal(b.size),
+    price: (a, b) => num(b.buyPrice) - num(a.buyPrice),
+    name: (a, b) => String(a.name).localeCompare(String(b.name)) || sizeVal(a.size) - sizeVal(b.size)
+  };
+  return list.sort(by[u.sort] || by.new);
+}
+function itemRow(it, act = 'openItem') {
+  const left = retLeft(it);
+  const ret = left == null ? '' : `<span class="tag ${left <= 3 ? 'bad' : 'warn'}">${left >= 0 ? 'Rückgabe: ' + left + ' T' : 'Frist seit ' + (-left) + ' T um'}</span>`;
+  const st = it.status === 'stock' ? '' : `<span class="tag">${STATUS_TXT[it.status]}</span>`;
+  return `<button class="it" data-act="${act}" data-id="${it.id}">
+    <span class="mid"><span class="t">${esc(it.name || it.model || it.sku)}</span>
+      <span class="s"><span class="sku">${esc(it.sku)}</span><span class="sz">EU ${esc(it.size)}</span><span>${esc(it.location || '')}</span>${lvlBars(it.ver && it.ver.lvl)}${st}${ret}</span></span>
+    <span class="r">${eur(it.buyPrice)}<small>${it.sx && it.sx.bid != null ? 'Gebot ' + eur0(it.sx.bid) : (it.status === 'stock' && daysSince(it.buyDate || it.createdAt) != null ? daysSince(it.buyDate || it.createdAt) + ' T' : '')}</small></span>
+  </button>`;
+}
+VIEWS.inventory = () => {
+  const u = S.ui.inv, all = live(S.items), list = invFiltered();
+  const locs = [...new Set(all.map(i => i.location).filter(Boolean))].sort(), brands = [...new Set(all.map(i => i.brand).filter(Boolean))].sort();
+  const cnt = s => all.filter(i => s === 'all' || i.status === s).length;
+  const sum = list.reduce((a, i) => a + num(i.buyPrice), 0);
+  return `
+  <input type="search" placeholder="Suche: SKU, Name, Größe, Lagerort, Bestellnr. …" value="${esc(u.q)}" data-inp="invQ" autocomplete="off">
+  <div class="filters" style="margin-top:8px">
+    ${[['stock', 'Bestand'], ['sold', 'Verkauft'], ['returned', 'Retoure'], ['all', 'Alle']].map(([k, l]) => `<button class="chip ${u.status === k ? 'on' : ''}" data-act="invSet" data-k="status" data-v="${k}">${l} ${cnt(k)}</button>`).join('')}
+    <select data-chg="invSel" data-k="loc"><option value="">Lagerort</option>${locs.map(l => `<option ${u.loc === l ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select>
+    <select data-chg="invSel" data-k="brand"><option value="">Marke</option>${brands.map(l => `<option ${u.brand === l ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select>
+    <select data-chg="invSel" data-k="sort">${[['new', 'Neueste zuerst'], ['old', 'Älteste zuerst'], ['sku', 'SKU'], ['name', 'Name'], ['price', 'Preis']].map(([k, l]) => `<option value="${k}" ${u.sort === k ? 'selected' : ''}>${l}</option>`).join('')}</select>
+  </div>
+  <div class="note" style="margin:6px 2px">${list.length} Paar(e) · Einkauf ${eur(sum)}</div>
+  <div id="invList">${list.length ? list.slice(0, u.n).map(i => itemRow(i)).join('') : '<div class="empty">Keine Treffer.</div>'}</div>
+  ${list.length > u.n ? `<button class="btn wide ghost" data-act="invMore">Weitere ${Math.min(60, list.length - u.n)} anzeigen</button>` : ''}`;
+};
+let _invT = 0;
+INP.invQ = el => { S.ui.inv.q = el.value; S.ui.inv.n = 60; clearTimeout(_invT); _invT = setTimeout(() => { const pos = el.selectionStart; render(); const n = $('[data-inp="invQ"]'); if (n) { n.focus(); try { n.setSelectionRange(pos, pos); } catch (e) {} } }, 220); };
+ACT.invSet = el => { S.ui.inv[el.dataset.k] = el.dataset.v; S.ui.inv.n = 60; render(); };
+CHG.invSel = el => { S.ui.inv[el.dataset.k] = el.value; S.ui.inv.n = 60; render(); };
+ACT.invMore = () => { S.ui.inv.n += 60; render(); };
+
+/* ---- Artikel-Detail ---- */
+function itemBody(it) {
+  const sale = live(S.sales).find(s => s.itemId === it.id);
+  const sx = it.sx || {};
+  return `
+    ${it.thumb ? `<img class="shot" data-act="zoom" data-key="${it.thumb}" data-shot="${it.thumb}" alt="Label">` : ''}
+    <div class="row" style="margin:8px 0"><span class="tag ${it.status === 'stock' ? 'ok' : ''}">${STATUS_TXT[it.status]}</span>
+      <span class="note">${LVL_TXT[(it.ver && it.ver.lvl) || 0]} ${lvlBars(it.ver && it.ver.lvl)}${it.ver && it.ver.user ? ' · von dir am Label geprüft' : ''}</span></div>
+    ${sx.bid != null || sx.ask != null ? `<div class="card tight"><dl class="kv"><dt>StockX höchstes Gebot</dt><dd>${sx.bid != null ? eur(sx.bid) : '–'}</dd><dt>StockX niedrigstes Angebot</dt><dd>${sx.ask != null ? eur(sx.ask) : '–'}</dd><dt>Stand</dt><dd>${dDE(sx.at)}</dd></dl></div>` : ''}
+    ${sale ? `<div class="card tight"><dl class="kv"><dt>Verkauft am</dt><dd>${dDE(sale.date)}</dd><dt>an / über</dt><dd>${esc(sale.platform || '–')}</dd><dt>Verkaufspreis</dt><dd>${eur(sale.price)}</dd><dt>Gewinn</dt><dd class="${saleProfit(sale) >= 0 ? 'pos' : 'neg'}">${eur(saleProfit(sale))}</dd></dl></div>` : ''}
+    ${it.status === 'returned' && it.ret ? `<div class="card tight"><dl class="kv"><dt>Retourniert am</dt><dd>${dDE(it.ret.date)}</dd><dt>Erstattung</dt><dd>${it.ret.refundDone ? eur(it.ret.refundAmt) + ' am ' + dDE(it.ret.refundDate) : 'offen'}</dd></dl></div>` : ''}
+    <div data-form>${itemFormHTML(it)}</div>
+    <div class="row" style="margin-top:14px">
+      ${it.status === 'stock' ? `<button class="btn sm dark" data-act="itemSell">Verkaufen</button><button class="btn sm" data-act="itemReturn">Retoure</button>` : ''}
+      ${it.status === 'returned' ? `<button class="btn sm" data-act="itemUnreturn">Retoure rückgängig</button>` : ''}
+      <button class="btn sm" data-act="itemVerify">SKU prüfen</button>
+      ${SX.on() ? `<button class="btn sm" data-act="itemMarket">StockX-Preis</button>` : ''}
+      ${sx.url ? `<a class="btn sm ghost" href="${esc(sx.url)}" target="_blank" rel="noopener">StockX</a>` : ''}
+      <button class="btn sm ghost" data-act="itemDup">Duplizieren</button>
+      <button class="btn sm bad" data-act="itemDel">Löschen</button>
+    </div>
+    ${it.ver && it.ver.ev && it.ver.ev.length ? `<details class="card tight" style="margin-top:14px"><summary>Prüfprotokoll</summary>${evHTML(it.ver.lvl, it.ver.ev)}</details>` : ''}`;
+}
+function openItem(id) {
+  const it = itemById(id); if (!it) return;
+  const el = sheet({ title: it.name || it.sku, body: itemBody(it), data: { item: id }, foot: `<button class="btn ghost" data-act="closeSheet">Schließen</button><button class="btn pri" data-act="itemSave">Speichern</button>` });
+  hydrateShot(el);
+}
+function refreshItem(id) { const el = $(`.sheet[data-item="${id}"]`); const it = itemById(id); if (!el) return; if (!it) return closeSheet(el); $('.sheet-body', el).innerHTML = itemBody(it); hydrateShot(el); }
+const sheetItem = el => { const sh = el.closest('.sheet'); return sh ? itemById(sh.dataset.item) : null; };
+ACT.openItem = el => openItem(el.dataset.id);
+function saveItemForm(sh, it) {
+  const { v, missing } = cleanItemFields(readForm($('[data-form]', sh)));
+  markMissing(sh, missing);
+  if (missing.length) { toast('Es fehlt: ' + missing.map(m => m.l).join(', '), 'bad'); return false; }
+  if (skuKey(v.sku) !== skuKey(it.sku)) { it.ver = { lvl: 0, ev: [{ ok: null, t: 'SKU von Hand geändert am ' + dDE(today()) }], src: 'manual' }; it.sx = null; }
+  Object.assign(it, v); touch(it);
+  addToList('locations', v.location); addToList('dealers', v.dealer);
+  save('items'); return true;
+}
+ACT.itemSave = el => { const sh = el.closest('.sheet'), it = sheetItem(el); if (it && saveItemForm(sh, it)) { closeSheet(sh); toast('Gespeichert', 'ok'); render(); } };
+ACT.itemDel = async el => {
+  const it = sheetItem(el); if (!it) return;
+  if (!(await ask('Diesen Artikel endgültig löschen? Ein zugehöriger Verkauf wird mit entfernt.', { ok: 'Löschen', danger: true }))) return;
+  it._del = true; touch(it);
+  S.sales.forEach(s => { if (s.itemId === it.id && !s._del) { s._del = true; touch(s); } });
+  if (it.thumb && !live(S.items).some(x => x.thumb === it.thumb)) DB.del('img', it.thumb).catch(() => {});
+  save('items', 'sales'); closeSheet(el.closest('.sheet')); render();
+};
+ACT.itemDup = el => {
+  const it = sheetItem(el); if (!it) return;
+  const c = { ...structuredClone(it), id: uid(), status: 'stock', ret: null, createdAt: nowISO(), updatedAt: nowISO() };
+  S.items.unshift(c); save('items'); closeSheet(el.closest('.sheet')); render(); openItem(c.id); toast('Dupliziert – Größe/Preis anpassen');
+};
+ACT.itemSell = el => { const sh = el.closest('.sheet'), it = sheetItem(el); if (!it || !saveItemForm(sh, it)) return; closeSheet(sh); S.ui.sale.sel = it.id; go('sales'); };
+ACT.itemReturn = async el => {
+  const sh = el.closest('.sheet'), it = sheetItem(el); if (!it) return;
+  if (!(await ask(`${it.name || it.sku} (EU ${it.size}) als retourniert buchen? Der Artikel verlässt den Bestand; die Erstattung von ${eur(it.buyPrice)} wird nachgehalten.`, { ok: 'Retoure buchen' }))) return;
+  it.status = 'returned'; it.ret = { date: today(), refundDone: false, refundAmt: num(it.buyPrice), refundDate: '' }; touch(it);
+  save('items'); closeSheet(sh); render(); toast('Retoure gebucht', 'ok');
+};
+ACT.itemUnreturn = el => { const it = sheetItem(el) || itemById(el.dataset.id); if (!it) return; it.status = 'stock'; it.ret = null; touch(it); save('items'); const sh = el.closest('.sheet'); if (sh) closeSheet(sh); render(); toast('Wieder im Bestand'); };
+ACT.itemVerify = async el => {
+  const sh = el.closest('.sheet'), it = sheetItem(el); if (!it) return;
+  el.disabled = true; el.textContent = 'Prüfe …';
+  try { await verifyItem(it, readForm($('[data-form]', sh))); refreshItem(it.id); render(); toast('Prüfstufe: ' + LVL_TXT[it.ver.lvl], it.ver.lvl >= 2 ? 'ok' : ''); }
+  catch (e) { toast(errMsg(e), 'bad'); el.disabled = false; el.textContent = 'SKU prüfen'; }
+};
+async function verifyItem(it, form) {
+  const f = form || it;
+  let r = await resolveSku({ sku: f.sku, brand: f.brand, gtin: f.gtin, gtSrc: 'ki', sizeEU: f.size, sizeUS: f.sizeUS, sizeUK: f.sizeUK }, { });
+  if (r.lvl < 2 && S.settings.webLookup && AI.ready() && skuKey(r.f.sku)) r = await webConfirm(r, f.model || f.name);
+  if (skuKey(r.f.sku) !== skuKey(f.sku) && r.lvl >= 2) r.ev.unshift({ ok: false, t: `Gespeichert war „${f.sku}“ – laut Katalog „${r.f.sku}“. SKU wurde angepasst.` });
+  if (r.lvl >= 2) it.sku = r.f.sku;
+  for (const k of ['name', 'brand', 'color', 'retail', 'retailCur', 'releaseDate', 'sizeUS', 'sizeUK', 'gtin']) if ((it[k] === '' || it[k] == null) && r.f[k] != null && r.f[k] !== '') it[k] = r.f[k];
+  if (r.lvl >= 2 && r.f.name && (!it.name || it.name === it.model)) it.name = r.f.name;
+  it.ver = { lvl: r.lvl, ev: r.ev, src: (it.ver && it.ver.src) || 'manual', user: !!(it.ver && it.ver.user) };
+  if (r.sx) it.sx = { ...(it.sx || {}), ...r.sx };
+  touch(it); rememberCatalog(it); save('items', 'catalog');
+}
+ACT.itemMarket = async el => {
+  const it = sheetItem(el); if (!it) return;
+  el.disabled = true; el.textContent = 'Lade …';
+  try { const ok = await refreshMarket(it); refreshItem(it.id); toast(ok ? 'StockX-Preis aktualisiert' : 'Für diese Größe liefert StockX keine Marktdaten.', ok ? 'ok' : ''); }
+  catch (e) { toast(errMsg(e), 'bad'); el.disabled = false; el.textContent = 'StockX-Preis'; }
+};
+async function refreshMarket(it) {
+  if (!it.sx || !it.sx.pid || !it.sx.vid) { await verifyItem(it); }
+  if (!it.sx || !it.sx.pid || !it.sx.vid) return false;
+  const m = await SX.market(it.sx.pid, it.sx.vid); if (!m) return false;
+  Object.assign(it.sx, m); touch(it); save('items'); return true;
+}
+ACT.marketAll = async el => {
+  const list = live(S.items).filter(i => i.status === 'stock' && (!i.sx || !i.sx.at || daysSince(i.sx.at) >= 1)).slice(0, 80);
+  if (!list.length) { toast('Alle Marktpreise sind von heute.'); return; }
+  el.disabled = true; let ok = 0;
+  for (let i = 0; i < list.length; i++) {
+    el.textContent = `StockX-Preise … ${i + 1}/${list.length}`;
+    try { if (await refreshMarket(list[i])) ok++; } catch (e) { if (/limit|verbunden|lehnt/i.test(errMsg(e))) { toast(errMsg(e), 'bad'); break; } }
+    await sleep(350);
+  }
+  toast(ok + ' Marktpreis(e) aktualisiert', 'ok'); render();
+};
+
+/* ---- 07-sales-returns.js ---- */
+/* ================= Verkauf ================= */
+VIEWS.sales = () => {
+  const u = S.ui.sale, sel = u.sel && itemById(u.sel);
+  const q = u.q.trim();
+  const stock = live(S.items).filter(i => i.status === 'stock');
+  const hits = !q ? [] : stock.filter(i => matchQ(i, q)).slice(0, 25);
+  const sales = live(S.sales).sort((a, b) => (b.date || '').localeCompare(a.date || '') || (b.createdAt || '').localeCompare(a.createdAt || ''));
+  return `
+  <h2 style="margin-top:4px">Verkauf erfassen</h2>
+  ${sel && sel.status === 'stock' ? saleFormHTML(sel) : `
+    <input type="search" placeholder="Schuh suchen: SKU, Name, Größe" value="${esc(u.q)}" data-inp="saleQ" autocomplete="off">
+    <div id="saleHits">${q ? (hits.length ? hits.map(i => itemRow(i, 'salePick')).join('') : '<div class="empty">Kein passender Artikel im Bestand.</div>') : `<div class="note" style="margin:8px 2px">${stock.length} Paar(e) im Bestand – tippe, um zu suchen.</div>`}</div>`}
+  <h2>Verkäufe <span class="n">${sales.length}</span><span class="sp"></span>${sales.length ? '<button class="btn sm ghost" data-act="expSales">CSV</button>' : ''}</h2>
+  ${sales.length ? sales.slice(0, 100).map(s => { const it = S.items.find(x => x.id === s.itemId) || {}; const p = saleProfit(s);
+    return `<button class="it" data-act="openSale" data-id="${s.id}"><span class="mid"><span class="t">${esc(it.name || it.sku || s.label || 'Artikel')}</span>
+      <span class="s"><span class="sku">${esc(it.sku || '')}</span><span class="sz">EU ${esc(it.size || '')}</span><span>${dDE(s.date)}</span><span>${esc(s.platform || '')}</span></span></span>
+      <span class="r">${eur(s.price)}<small class="${p >= 0 ? 'pos' : 'neg'}">${p >= 0 ? '+' : ''}${eur(p)}</small></span></button>`; }).join('') : '<div class="empty">Noch keine Verkäufe.</div>'}`;
+};
+function saleFormHTML(it) {
+  const d = S.ui.sale.draft || (S.ui.sale.draft = { price: '', vat: !!(S.meta.lastSale && S.meta.lastSale.vat), platform: (S.meta.lastSale && S.meta.lastSale.platform) || '', fees: '', ship: '', date: today(), note: '' });
+  return `<div class="card">
+    <div class="row nw"><div class="grow"><b>${esc(it.name || it.sku)}</b><div class="s" style="margin-top:3px"><span class="sku">${esc(it.sku)}</span> <span class="sz">EU ${esc(it.size)}</span> <span class="note">${esc(it.location || '')} · EK ${eur(it.buyPrice)}${it.buyVat ? ' inkl. MwSt' : ''}</span></div></div>
+      <button class="btn sm ghost" data-act="saleUnpick">Ändern</button></div>
+    <div class="form" style="margin-top:12px" data-sale>
+      ${fld('price', 'Verkaufspreis €', d.price, { req: 1, dec: 1, w: 'h' })}
+      ${fld('vat', 'inkl. USt', d.vat, { check: 1, w: 'h' })}
+      ${fld('platform', 'Verkauft an / über', d.platform, { chips: S.lists.platforms })}
+      ${fld('fees', 'Gebühren €', d.fees, { dec: 1, w: 'h' })}
+      ${fld('ship', 'Versand €', d.ship, { dec: 1, w: 'h' })}
+      ${fld('date', 'Verkaufsdatum', d.date, { date: 1, w: 'h' })}
+      ${fld('note', 'Notiz', d.note, { w: 'h' })}
+    </div>
+    <div class="card tight" id="salePrev" style="margin-bottom:10px">${salePreview(it, d)}</div>
+    <button class="btn pri wide" data-act="saleSave">Verkauf buchen</button>
+  </div>`;
+}
+function salePreview(it, d) {
+  const s = { price: num(d.price), vat: d.vat, fees: num(d.fees), ship: num(d.ship) };
+  const p = r2(saleNet(s) - s.fees - s.ship - buyNet(it));
+  return `<dl class="kv"><dt>Erlös netto</dt><dd>${eur(saleNet(s))}</dd><dt>Einkauf netto</dt><dd>− ${eur(buyNet(it))}</dd><dt>Gebühren + Versand</dt><dd>− ${eur(s.fees + s.ship)}</dd>
+    <dt><b>Gewinn</b></dt><dd class="${p >= 0 ? 'pos' : 'neg'}"><b>${eur(p)}</b></dd></dl>`;
+}
+let _saleT = 0;
+INP.saleQ = el => { S.ui.sale.q = el.value; clearTimeout(_saleT); _saleT = setTimeout(() => { const pos = el.selectionStart; render(); const n = $('[data-inp="saleQ"]'); if (n) { n.focus(); try { n.setSelectionRange(pos, pos); } catch (e) {} } }, 200); };
+INP.sale = () => { const box = $('[data-sale]'); if (!box) return; const it = itemById(S.ui.sale.sel); S.ui.sale.draft = readForm(box); if (it) $('#salePrev').innerHTML = salePreview(it, S.ui.sale.draft); };
+ACT.salePick = el => { S.ui.sale.sel = el.dataset.id; S.ui.sale.draft = null; render(); };
+ACT.saleUnpick = () => { S.ui.sale.sel = ''; S.ui.sale.draft = null; render(); };
+ACT.saleSave = () => {
+  const it = itemById(S.ui.sale.sel), box = $('[data-sale]'); if (!it || !box) return;
+  const f = readForm(box);
+  if (f.price === '' || num(f.price) <= 0) { markMissing(box, [{ k: 'price' }]); toast('Bitte den Verkaufspreis eintragen.', 'bad'); return; }
+  const ts = nowISO();
+  const s = { id: uid(), itemId: it.id, date: toISODate(f.date) || today(), price: r2(num(f.price)), vat: !!f.vat, platform: f.platform, fees: r2(num(f.fees)), ship: r2(num(f.ship)), note: f.note, buyNet: buyNet(it), createdAt: ts, updatedAt: ts };
+  S.sales.unshift(s); it.status = 'sold'; touch(it);
+  addToList('platforms', f.platform); S.meta.lastSale = { vat: s.vat, platform: s.platform };
+  S.ui.sale = { q: '', sel: '', draft: null };
+  save('sales', 'items', 'meta'); render(); toast('Verkauf gebucht · Gewinn ' + eur(saleProfit(s)), 'ok');
+};
+ACT.openSale = el => {
+  const s = S.sales.find(x => x.id === el.dataset.id); if (!s) return; const it = S.items.find(x => x.id === s.itemId) || {};
+  sheet({ title: 'Verkauf', data: { sale: s.id }, body: `<b>${esc(it.name || it.sku || '')}</b><div class="s" style="margin:4px 0 12px"><span class="sku">${esc(it.sku || '')}</span> <span class="sz">EU ${esc(it.size || '')}</span></div>
+    <dl class="kv"><dt>Datum</dt><dd>${dDE(s.date)}</dd><dt>an / über</dt><dd>${esc(s.platform || '–')}</dd><dt>Verkaufspreis</dt><dd>${eur(s.price)}${s.vat ? ' inkl. USt' : ''}</dd><dt>Erlös netto</dt><dd>${eur(saleNet(s))}</dd>
+    <dt>Gebühren</dt><dd>${eur(s.fees)}</dd><dt>Versand</dt><dd>${eur(s.ship)}</dd><dt>Einkauf netto</dt><dd>${eur(it.id ? buyNet(it) : s.buyNet)}</dd><dt><b>Gewinn</b></dt><dd class="${saleProfit(s) >= 0 ? 'pos' : 'neg'}"><b>${eur(saleProfit(s))}</b></dd>${s.note ? `<dt>Notiz</dt><dd>${esc(s.note)}</dd>` : ''}</dl>`,
+    foot: `<button class="btn bad" data-act="saleUndo">Verkauf rückgängig</button><button class="btn ghost" data-act="closeSheet">Schließen</button>` });
+};
+ACT.saleUndo = async el => {
+  const sh = el.closest('.sheet'), s = S.sales.find(x => x.id === sh.dataset.sale); if (!s) return;
+  if (!(await ask('Verkauf löschen und den Artikel zurück in den Bestand legen?', { ok: 'Rückgängig', danger: true }))) return;
+  s._del = true; touch(s); const it = S.items.find(x => x.id === s.itemId); if (it && !it._del) { it.status = 'stock'; touch(it); }
+  save('sales', 'items'); closeSheet(sh); render();
+};
+
+/* ================= Retouren ================= */
+VIEWS.returns = () => {
+  const all = live(S.items);
+  const due = all.map(it => ({ it, left: retLeft(it) })).filter(x => x.left != null).sort((a, b) => a.left - b.left);
+  const pend = all.filter(it => it.status === 'returned' && it.ret && !it.ret.refundDone).sort((a, b) => (a.ret.date || '').localeCompare(b.ret.date || ''));
+  const hist = all.filter(it => it.status === 'returned').sort((a, b) => ((b.ret && b.ret.date) || '').localeCompare((a.ret && a.ret.date) || ''));
+  return `
+  <h2 style="margin-top:4px">Rückgabefristen <span class="n">${due.length}</span></h2>
+  <div class="note" style="margin:-4px 2px 6px">${S.settings.retDays} Tage ab Lieferdatum, sichtbar bis ${S.settings.retGrace} Tage danach.</div>
+  ${due.length ? due.map(({ it, left }) => `<div class="it"><span class="mid"><span class="t">${esc(it.name || it.sku)}</span>
+      <span class="s"><span class="sku">${esc(it.sku)}</span><span class="sz">EU ${esc(it.size)}</span><span>${esc(it.dealer || '')}</span><span>geliefert ${dDE(it.deliveryDate)}</span>
+      <span class="tag ${left <= 3 ? 'bad' : 'warn'}">${left > 0 ? 'noch ' + left + ' Tag(e)' : left === 0 ? 'letzter Tag' : 'seit ' + (-left) + ' T abgelaufen'}</span></span>
+      <span class="row" style="margin-top:8px"><button class="btn sm dark" data-act="retDo" data-id="${it.id}">Retoure buchen</button><button class="btn sm ghost" data-act="retKeep" data-id="${it.id}">Behalten</button></span></span></div>`).join('') : '<div class="empty">Keine laufenden Fristen. (Erinnerung braucht ein Lieferdatum am Artikel.)</div>'}
+  <h2>Ausstehende Erstattungen <span class="n">${pend.length}</span></h2>
+  ${pend.length ? pend.map(it => `<div class="it"><span class="mid"><span class="t">${esc(it.name || it.sku)}</span>
+      <span class="s"><span class="sku">${esc(it.sku)}</span><span class="sz">EU ${esc(it.size)}</span><span>${esc(it.dealer || '')}</span><span>retourniert ${dDE(it.ret.date)}</span>${refundDue(it) ? '<span class="tag bad">überfällig prüfen</span>' : '<span class="tag">in Bearbeitung</span>'}</span>
+      <span class="row nw" style="margin-top:8px"><input type="text" inputmode="decimal" value="${deNum(it.ret.refundAmt)}" data-refund="${it.id}" style="max-width:120px" aria-label="Erstattungsbetrag"><button class="btn sm dark" data-act="refundOk" data-id="${it.id}">Erstattung erhalten</button></span></span></div>`).join('') : '<div class="empty">Keine offenen Erstattungen.</div>'}
+  <h2>Retouren-Historie <span class="n">${hist.length}</span><span class="sp"></span>${hist.length ? '<button class="btn sm ghost" data-act="expReturns">CSV</button>' : ''}</h2>
+  ${hist.length ? hist.map(it => `<div class="it"><span class="mid"><span class="t">${esc(it.name || it.sku)}</span>
+      <span class="s"><span class="sku">${esc(it.sku)}</span><span class="sz">EU ${esc(it.size)}</span><span>${dDE(it.ret && it.ret.date)}</span>${it.ret && it.ret.refundDone ? `<span class="tag ok">erstattet ${eur(it.ret.refundAmt)}</span>` : '<span class="tag warn">Erstattung offen</span>'}</span></span>
+      <button class="btn sm ghost" data-act="retUndo" data-id="${it.id}">Rückgängig</button></div>`).join('') : '<div class="empty">Noch keine Retouren.</div>'}`;
+};
+ACT.retDo = async el => {
+  const it = itemById(el.dataset.id); if (!it) return;
+  if (!(await ask(`${it.name || it.sku} (EU ${it.size}) als retourniert buchen?`, { ok: 'Retoure buchen' }))) return;
+  it.status = 'returned'; it.ret = { date: today(), refundDone: false, refundAmt: num(it.buyPrice), refundDate: '' }; touch(it); save('items'); render(); toast('Retoure gebucht', 'ok');
+};
+ACT.retKeep = el => { const it = itemById(el.dataset.id); if (!it) return; it.ret = { ...(it.ret || {}), keep: true }; touch(it); save('items'); render(); toast('Erinnerung ausgeblendet'); };
+ACT.refundOk = el => {
+  const it = itemById(el.dataset.id); if (!it || !it.ret) return; const inp = $(`[data-refund="${it.id}"]`);
+  it.ret.refundAmt = r2(num(inp ? inp.value : it.ret.refundAmt)); it.ret.refundDone = true; it.ret.refundDate = today(); touch(it); save('items'); render(); toast('Erstattung ' + eur(it.ret.refundAmt) + ' bestätigt', 'ok');
+};
+ACT.retUndo = async el => { if (await ask('Retoure rückgängig machen und Artikel zurück in den Bestand legen?', { ok: 'Rückgängig' })) ACT.itemUnreturn(el); };
+
+/* ---- 08-dashboard.js ---- */
+/* ================= Übersicht ================= */
+VIEWS.dash = () => {
+  const items = live(S.items), sales = live(S.sales);
+  const stock = items.filter(i => i.status === 'stock');
+  const cap = stock.reduce((a, i) => a + buyNet(i), 0);
+  const withBid = stock.filter(i => i.sx && i.sx.bid != null);
+  const mv = withBid.reduce((a, i) => a + num(i.sx.bid), 0), mvCost = withBid.reduce((a, i) => a + buyNet(i), 0);
+  const ym = today().slice(0, 7), yy = today().slice(0, 4);
+  const pr = f => sales.filter(f).reduce((a, s) => a + saleProfit(s), 0);
+  const rev = f => sales.filter(f).reduce((a, s) => a + saleNet(s), 0);
+  const pM = pr(s => (s.date || '').startsWith(ym)), pY = pr(s => (s.date || '').startsWith(yy)), pAll = pr(() => true);
+  const revAll = rev(() => true);
+  const hold = sales.map(s => { const it = S.items.find(x => x.id === s.itemId); const a = it && toISODate(it.buyDate || it.createdAt), b = toISODate(s.date); return a && b ? Math.max(0, Math.round((new Date(b) - new Date(a)) / 864e5)) : null; }).filter(x => x != null);
+  const due = items.map(it => ({ it, left: retLeft(it) })).filter(x => x.left != null).sort((a, b) => a.left - b.left);
+  const refunds = items.filter(refundDue);
+  const unver = stock.filter(i => !i.ver || (i.ver.lvl || 0) < 2 && !i.ver.user).length;
+
+  /* letzte 6 Monate */
+  const months = []; const d0 = new Date(); d0.setDate(1);
+  for (let i = 5; i >= 0; i--) { const d = new Date(d0.getFullYear(), d0.getMonth() - i, 1); months.push(d.getFullYear() + '-' + pad2(d.getMonth() + 1)); }
+  const mp = months.map(m => pr(s => (s.date || '').startsWith(m)));
+  const mMax = Math.max(1, ...mp.map(Math.abs));
+  const grp = (arr, key, val) => { const m = {}; arr.forEach(x => { const k = key(x) || '–'; m[k] = (m[k] || 0) + val(x); }); return Object.entries(m).sort((a, b) => b[1] - a[1]); };
+  const hbars = (rows, fmt) => { const mx = Math.max(1, ...rows.map(r => Math.abs(r[1]))); return rows.slice(0, 7).map(([k, v]) => `<div class="hb"><span>${esc(k)}</span><span class="tr"><i style="width:${Math.max(2, Math.abs(v) / mx * 100)}%"></i></span><b>${fmt(v)}</b></div>`).join('') || '<div class="note">Noch keine Daten.</div>'; };
+  const age = [['0–30 T', 0, 30], ['31–90 T', 31, 90], ['91–180 T', 91, 180], ['über 180 T', 181, 1e9]].map(([l, a, b]) => [l, stock.filter(i => { const d = daysSince(i.buyDate || i.createdAt) ?? 0; return d >= a && d <= b; }).length]);
+
+  return `
+  ${legacyBanner()}${backupBanner()}
+  ${due.length ? `<div class="banner ${due[0].left <= 3 ? 'bad' : 'warn'}"><div class="grow"><b>${due.length} Rückgabefrist(en) laufen.</b> Nächste: ${esc(due[0].it.name || due[0].it.sku)} – ${due[0].left > 0 ? 'noch ' + due[0].left + ' Tag(e)' : due[0].left === 0 ? 'heute letzter Tag' : 'abgelaufen'}</div><button class="btn sm dark" data-act="nav" data-view="returns">Ansehen</button></div>` : ''}
+  ${refunds.length ? `<div class="banner warn"><div class="grow"><b>${refunds.length} Erstattung(en) überfällig prüfen</b> – zusammen ${eur(refunds.reduce((a, i) => a + num(i.ret.refundAmt), 0))}</div><button class="btn sm dark" data-act="nav" data-view="returns">Ansehen</button></div>` : ''}
+  <div class="kpis">
+    <div class="kpi"><div class="l">Im Bestand</div><div class="v">${stock.length}</div><div class="d">gebunden ${eur0(cap)} netto</div></div>
+    <div class="kpi"><div class="l">Marktwert (Gebote)</div><div class="v">${withBid.length ? eur0(mv) : '–'}</div><div class="d">${withBid.length ? `${withBid.length}/${stock.length} Paare · <span class="${mv - mvCost >= 0 ? 'pos' : 'neg'}">${mv - mvCost >= 0 ? '+' : ''}${eur0(mv - mvCost)}</span> ggü. EK` : 'StockX-Preise noch nicht geladen'}</div></div>
+    <div class="kpi"><div class="l">Gewinn ${dDE(ym + '-01').slice(3)}</div><div class="v ${pM >= 0 ? 'pos' : 'neg'}">${eur0(pM)}</div><div class="d">Jahr ${yy}: ${eur0(pY)}</div></div>
+    <div class="kpi"><div class="l">Gewinn gesamt</div><div class="v ${pAll >= 0 ? 'pos' : 'neg'}">${eur0(pAll)}</div><div class="d">${sales.length} ${sales.length === 1 ? 'Verkauf' : 'Verkäufe'} · Marge ${revAll ? Math.round(pAll / revAll * 100) : 0} % · Ø ${hold.length ? Math.round(hold.reduce((a, b) => a + b, 0) / hold.length) : '–'} T Lagerzeit</div></div>
+  </div>
+  ${SX.on() && stock.length ? `<button class="btn wide ghost" style="margin-top:8px" data-act="marketAll">StockX-Preise für den Bestand aktualisieren</button>` : ''}
+  ${unver ? `<div class="banner info"><div class="grow"><b>${unver} Paar(e) im Bestand ohne belegte SKU.</b> ${SX.on() ? 'Jetzt gegen StockX prüfen?' : 'Mit StockX-Anbindung lassen sie sich automatisch prüfen.'}</div>${SX.on() ? '<button class="btn sm dark" data-act="verifyAll">Prüfen</button>' : ''}</div>` : ''}
+  <h2>Gewinn je Monat</h2>
+  <div class="card"><div class="bars">${months.map((m, i) => `<div class="b"><span>${mp[i] ? eur0(mp[i]) : ''}</span><i class="${mp[i] < 0 ? 'neg' : ''}" style="height:${Math.abs(mp[i]) / mMax * 78}%"></i>${m.slice(5)}/${m.slice(2, 4)}</div>`).join('')}</div></div>
+  <h2>Bestand nach Marke</h2><div class="card">${hbars(grp(stock, i => i.brand, () => 1), v => v + ' Paar')}</div>
+  <h2>Lagerdauer</h2><div class="card">${hbars(age, v => v + ' Paar')}</div>
+  <h2>Gewinn nach Verkaufskanal</h2><div class="card">${hbars(grp(sales, s => s.platform, s => saleProfit(s)), v => eur0(v))}</div>`;
+};
+function backupBanner() {
+  if (!live(S.items).length || (S.settings.sync && workerOn())) return '';
+  const d = S.meta.lastBackup ? daysSince(S.meta.lastBackup) : null;
+  if (d != null && d < 7) return '';
+  return `<div class="banner warn"><div class="grow"><b>${d == null ? 'Noch kein Backup.' : 'Letztes Backup vor ' + d + ' Tagen.'}</b> Die Daten liegen nur in diesem Browser.</div><button class="btn sm dark" data-act="backupExport">Backup sichern</button></div>`;
+}
+ACT.verifyAll = async el => {
+  const list = live(S.items).filter(i => i.status === 'stock' && (!i.ver || ((i.ver.lvl || 0) < 2 && !i.ver.user))).slice(0, 60);
+  el.disabled = true; let ok = 0; const web = S.settings.webLookup; S.settings.webLookup = false;
+  try {
+    for (let i = 0; i < list.length; i++) {
+      el.textContent = `${i + 1}/${list.length}`;
+      try { await verifyItem(list[i]); if (list[i].ver.lvl >= 2) ok++; } catch (e) { toast(errMsg(e), 'bad'); break; }
+      await sleep(300);
+    }
+  } finally { S.settings.webLookup = web; }
+  toast(`${ok} von ${list.length} bestätigt`, 'ok'); render();
+};
+
+/* ---- 09-data.js ---- */
+/* ================= Daten: Altdaten, Backup, CSV, Sync ================= */
+const normKey = k => String(k).toLowerCase().replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss').replace(/[^a-z0-9]/g, '');
+const ITEM_ALIAS = {
+  id: ['id'], sku: ['sku', 'stylecode', 'styleid', 'artikelnummer', 'style', 'skuhersteller'], brand: ['brand', 'marke'],
+  name: ['productname', 'produktname', 'name', 'title', 'titel', 'produkt'], model: ['model', 'modell', 'modellname', 'labeltext', 'modelllabeltext'],
+  color: ['color', 'farbe', 'colorway', 'colour'], size: ['size', 'groesse', 'groesseeu', 'eu', 'sizeeu', 'eugroesse'], sizeUS: ['sizeus', 'us', 'usgroesse'], sizeUK: ['sizeuk', 'uk'],
+  buyPrice: ['purchaseprice', 'einkaufspreis', 'ek', 'buyprice', 'kaufpreis', 'price', 'preis', 'cost'],
+  buyVat: ['purchasevat', 'buyvat', 'withvat', 'inclvat', 'vatincluded', 'inklmwst', 'mitmwst', 'hasvat', 'mwst', 'vat'],
+  location: ['location', 'lagerort', 'lager', 'storage'], dealer: ['dealer', 'haendler', 'retailer', 'store', 'placeofpurchase', 'shop', 'gekauftbei'],
+  buyDate: ['purchasedat', 'purchasedate', 'kaufdatum', 'buydate', 'gekauftam', 'date', 'datum'], orderNo: ['ordernumber', 'bestellnummer', 'orderno', 'bestellnr'],
+  invoiceDate: ['invoicedate', 'rechnungsdatum'], deliveryDate: ['deliverydate', 'lieferdatum'],
+  retail: ['retailprice', 'retail', 'retailpreis', 'uvp'], retailCur: ['retailcur', 'waehrung', 'currency'], releaseDate: ['releasedate', 'release', 'releasedatum'],
+  gtin: ['gtin', 'barcode', 'barcodegtin', 'ean', 'upc'], status: ['status'], note: ['notes', 'note', 'notiz', 'notizen', 'bemerkung']
+};
+const SALE_ALIAS = {
+  id: ['id'], itemId: ['itemid', 'inventoryid', 'articleid', 'artikelid'], price: ['saleprice', 'verkaufspreis', 'sellprice', 'price', 'preis'],
+  date: ['saledate', 'verkaufsdatum', 'soldat', 'date', 'datum'], platform: ['platform', 'plattform', 'buyer', 'kaeufer', 'soldto', 'kanal'],
+  fees: ['fees', 'gebuehren', 'fee'], ship: ['shipping', 'versand', 'ship', 'shippingcost'], vat: ['salevat', 'vatincluded', 'withvat', 'inclvat', 'inklust', 'ust', 'vat', 'mwst'],
+  note: ['notes', 'note', 'notiz'], sku: ['sku'], size: ['size', 'groesse'], name: ['productname', 'name', 'produktname'], buyPrice: ['purchaseprice', 'einkaufspreis', 'buyprice']
+};
+const RET_ALIAS = { itemId: ['itemid', 'originalid', 'id'], date: ['returndate', 'retourdatum', 'returnedat', 'date'], refundDone: ['refundconfirmed', 'refunded', 'erstattet', 'refunddone'], refundAmt: ['refundamount', 'refundamt', 'erstattungsbetrag', 'erstattung'], refundDate: ['refunddate', 'erstattungsdatum'] };
+const FIELD_LABEL = { sku: 'SKU', brand: 'Marke', name: 'Produktname', model: 'Modell (Label)', color: 'Farbe', size: 'Größe EU', sizeUS: 'US', sizeUK: 'UK', buyPrice: 'Einkaufspreis', buyVat: 'inkl. MwSt', location: 'Lagerort', dealer: 'Händler', buyDate: 'Kaufdatum', orderNo: 'Bestellnummer', invoiceDate: 'Rechnungsdatum', deliveryDate: 'Lieferdatum', retail: 'Retail', retailCur: 'Währung', releaseDate: 'Release', gtin: 'Barcode', status: 'Status', note: 'Notiz' };
+function mapObj(o, alias) {
+  const nk = {}; for (const k in o) nk[normKey(k)] = o[k];
+  const out = {};
+  for (const [t, al] of Object.entries(alias)) for (const a of al) if (nk[a] !== undefined && nk[a] !== null && nk[a] !== '') { out[t] = nk[a]; break; }
+  return out;
+}
+const truthy = v => v === true || v === 1 || /^(true|1|ja|yes|x|inkl\.?|y|j)$/i.test(String(v ?? '').trim());
+function legacyStatus(v, o) {
+  const s = String(v || '').toLowerCase();
+  if (/sold|verkauf/.test(s) || (o && o.sold === true)) return 'sold';
+  if (/return|retour/.test(s) || (o && o.returned === true)) return 'returned';
+  return 'stock';
+}
+function legacyItem(o, src = 'Altdaten') {
+  const m = mapObj(o, ITEM_ALIAS), ts = nowISO();
+  return {
+    id: m.id != null ? 'L' + m.id : uid(), sku: canonSku(m.brand, m.sku), brand: normBrand(m.brand), name: String(m.name || m.model || ''), model: String(m.model || ''), color: String(m.color || ''),
+    size: normSize(m.size), sizeUS: normSize(m.sizeUS), sizeUK: normSize(m.sizeUK), buyPrice: r2(num(m.buyPrice)), buyVat: truthy(m.buyVat),
+    location: String(m.location || ''), dealer: String(m.dealer || ''), orderNo: String(m.orderNo || ''), buyDate: toISODate(m.buyDate), invoiceDate: toISODate(m.invoiceDate), deliveryDate: toISODate(m.deliveryDate),
+    retail: m.retail == null ? '' : r2(num(m.retail)), retailCur: /usd|\$/i.test(m.retailCur || '') ? 'USD' : 'EUR', releaseDate: toISODate(m.releaseDate), gtin: gtinClean(m.gtin), note: String(m.note || ''),
+    status: legacyStatus(m.status, o), createdAt: ts, updatedAt: ts, sx: null, ver: { lvl: 0, ev: [{ ok: null, t: 'Aus ' + src + ' übernommen – SKU noch nicht geprüft' }], src: 'import' }
+  };
+}
+/** Übernimmt Daten im Format der alten App (inventory / sales / returns). Vorhandene IDs werden nicht überschrieben. */
+function importLegacy(data) {
+  const have = new Set(S.items.map(i => i.id)); let nI = 0, nS = 0, nR = 0;
+  const add = it => { if (have.has(it.id)) return S.items.find(i => i.id === it.id); S.items.push(it); have.add(it.id); nI++; return it; };
+  (data.inventory || data.items || []).forEach(o => { if (o && typeof o === 'object') add(legacyItem(o)); });
+  const haveS = new Set(S.sales.map(s => s.id)), linked = new Set(S.sales.filter(s => !s._del).map(s => s.itemId));
+  (data.sales || []).forEach(o => {
+    if (!o || typeof o !== 'object') return;
+    const m = mapObj(o, SALE_ALIAS), id = m.id != null ? 'LS' + m.id : uid(); if (haveS.has(id)) return;
+    let it = m.itemId != null && S.items.find(i => i.id === 'L' + m.itemId && !linked.has(i.id));
+    if (!it && m.sku) { const k = skuKey(m.sku), z = normSize(m.size); const pool = S.items.filter(i => !i._del && !linked.has(i.id) && skuKey(i.sku) === k && (!z || i.size === z)); it = pool.find(i => i.status === 'sold') || pool[0]; }
+    if (!it) { it = legacyItem({ sku: m.sku, name: m.name, size: m.size, purchasePrice: m.buyPrice }); it.id = uid(); S.items.push(it); have.add(it.id); nI++; }
+    it.status = 'sold'; linked.add(it.id);
+    const ts = nowISO();
+    S.sales.push({ id, itemId: it.id, date: toISODate(m.date) || today(), price: r2(num(m.price)), vat: truthy(m.vat), platform: String(m.platform || ''), fees: r2(num(m.fees)), ship: r2(num(m.ship)), note: String(m.note || ''), buyNet: buyNet(it), createdAt: ts, updatedAt: ts });
+    haveS.add(id); nS++;
+  });
+  (data.returns || data.retouren || []).forEach(o => {
+    if (!o || typeof o !== 'object') return;
+    const r = mapObj(o, RET_ALIAS);
+    let it = r.itemId != null && S.items.find(i => i.id === 'L' + r.itemId);
+    if (!it) it = add(legacyItem(o));
+    if (it.status === 'returned' && it.ret) return;
+    it.status = 'returned'; it.ret = { date: toISODate(r.date) || today(), refundDone: truthy(r.refundDone), refundAmt: r.refundAmt != null ? r2(num(r.refundAmt)) : num(it.buyPrice), refundDate: toISODate(r.refundDate) }; nR++;
+  });
+  for (const [k, names] of [['locations', ['locations', 'lagerorte']], ['dealers', ['dealers', 'haendler']], ['platforms', ['platforms', 'buyers', 'stores']]])
+    for (const n of names) if (Array.isArray(data[n])) data[n].forEach(v => typeof v === 'string' && addToList(k, v));
+  S.items.forEach(i => { if (i.location) addToList('locations', i.location); if (i.dealer) addToList('dealers', i.dealer); });
+  save('items', 'sales', 'lists');
+  return { nI, nS, nR };
+}
+function legacyRead() {
+  const out = {}; let found = false;
+  try {
+    for (const k of ['inventory', 'sales', 'returns', 'retouren', 'locations', 'dealers', 'buyers', 'platforms']) {
+      const raw = localStorage.getItem(k); if (!raw) continue;
+      try { const v = JSON.parse(raw); if (Array.isArray(v) && v.length) { out[k] = v; if (k === 'inventory' || k === 'sales') found = true; } } catch (e) {}
+    }
+    if (!S.settings.aiKey) for (let i = 0; i < localStorage.length; i++) { const v = localStorage.getItem(localStorage.key(i)) || ''; const m = v.match(/sk-ant-[A-Za-z0-9_\-]{20,}/); if (m) { out._aiKey = m[0]; break; } }
+  } catch (e) {}
+  return found ? out : null;
+}
+function legacyBanner() {
+  if (S.meta.legacyDone) return '';
+  const l = legacyRead(); if (!l) return '';
+  return `<div class="banner info"><div class="grow"><b>Daten der bisherigen App gefunden:</b> ${(l.inventory || []).length} Artikel, ${(l.sales || []).length} Verkäufe${(l.returns || l.retouren) ? ', ' + (l.returns || l.retouren).length + ' Retouren' : ''}. Die alten Daten bleiben unverändert erhalten.</div>
+    <button class="btn sm dark" data-act="legacyImport">Übernehmen</button><button class="btn sm ghost" data-act="legacySkip">Nicht jetzt</button></div>`;
+}
+ACT.legacyImport = () => {
+  const l = legacyRead(); if (!l) return;
+  const r = importLegacy(l);
+  if (l._aiKey && !S.settings.aiKey) S.settings.aiKey = l._aiKey;
+  S.meta.legacyDone = nowISO(); save('meta', 'settings'); render();
+  info(`Übernommen: ${r.nI} Artikel, ${r.nS} Verkäufe, ${r.nR} Retouren.\n\nBitte Stichproben ansehen. Die SKUs der Altdaten gelten als ungeprüft – auf der Übersicht lassen sie sich gesammelt gegen StockX prüfen.`);
+};
+ACT.legacySkip = () => { S.meta.legacyDone = 'skip'; save('meta'); render(); };
+
+/* ---- Backup ---- */
+function backupData() {
+  const { aiKey, token, batch, ...rest } = S.settings;
+  return { app: 'sneaker-warehouse', v: 8, exportedAt: nowISO(), items: S.items, sales: S.sales, catalog: S.catalog, lists: S.lists, settings: rest };
+}
+ACT.backupExport = () => { dl(`sneaker-warehouse-backup-${today()}.json`, JSON.stringify(backupData()), 'application/json'); S.meta.lastBackup = nowISO(); save('meta'); toast('Backup gespeichert', 'ok'); setTimeout(render, 300); };
+ACT.backupImport = () => { const f = $('#fJson'); f.value = ''; f.click(); };
+async function handleJsonFile(file) {
+  let data; try { data = JSON.parse(await file.text()); } catch (e) { toast('Datei ist kein gültiges JSON.', 'bad'); return; }
+  if (data && data.app === 'sneaker-warehouse') {
+    const n = (data.items || []).filter(i => !i._del).length;
+    const merge = await ask(`Backup vom ${dDE(data.exportedAt)} mit ${n} Artikeln und ${(data.sales || []).filter(s => !s._del).length} Verkäufen.<br><br><b>Zusammenführen</b> behält deine jetzigen Daten und ergänzt bzw. aktualisiert aus dem Backup.`, { ok: 'Zusammenführen', cancel: 'Abbrechen', html: true });
+    if (!merge) return;
+    mergeRemote(data);
+    if (data.settings) for (const k of ['doubleRead', 'webLookup', 'keepPhoto', 'vat', 'retDays', 'retGrace', 'refundDelay']) if (data.settings[k] !== undefined) S.settings[k] = data.settings[k];
+    save('items', 'sales', 'catalog', 'lists', 'settings'); render(); toast('Backup eingespielt', 'ok');
+  } else if (data && (Array.isArray(data.inventory) || Array.isArray(data.sales) || Array.isArray(data))) {
+    const r = importLegacy(Array.isArray(data) ? { inventory: data } : data);
+    render(); info(`Backup der alten App übernommen: ${r.nI} Artikel, ${r.nS} Verkäufe, ${r.nR} Retouren. Bereits vorhandene Einträge wurden übersprungen.`);
+  } else toast('Unbekanntes Dateiformat.', 'bad');
+}
+
+/* ---- CSV ---- */
+const yn = b => b ? 'ja' : 'nein';
+function inventoryRows(list) {
+  const head = ['SKU', 'Marke', 'Produktname', 'Modell', 'Farbe', 'Größe EU', 'US', 'UK', 'Einkaufspreis', 'inkl. MwSt', 'EK netto', 'Lagerort', 'Händler', 'Bestellnummer', 'Kaufdatum', 'Rechnungsdatum', 'Lieferdatum', 'Retail', 'Währung', 'Release', 'Barcode', 'Status', 'Prüfstufe', 'StockX Gebot', 'StockX Angebot', 'StockX-Link', 'Notiz', 'ID'];
+  return [head, ...list.map(i => [i.sku, i.brand, i.name, i.model, i.color, i.size, i.sizeUS, i.sizeUK, deNum(i.buyPrice), yn(i.buyVat), deNum(buyNet(i)), i.location, i.dealer, i.orderNo, dDE(i.buyDate), dDE(i.invoiceDate), dDE(i.deliveryDate), deNum(i.retail), i.retail !== '' && i.retail != null ? i.retailCur : '', dDE(i.releaseDate), i.gtin, STATUS_TXT[i.status], (i.ver && i.ver.lvl) || 0, i.sx ? deNum(i.sx.bid) : '', i.sx ? deNum(i.sx.ask) : '', (i.sx && i.sx.url) || '', i.note, i.id])];
+}
+ACT.expInventory = () => dl(`bestand-${today()}.csv`, csvOut(inventoryRows(live(S.items))), 'text/csv');
+ACT.expSales = () => {
+  const rows = [['Verkaufsdatum', 'SKU', 'Produktname', 'Größe EU', 'Verkauft an/über', 'Verkaufspreis', 'inkl. USt', 'Erlös netto', 'Gebühren', 'Versand', 'Einkauf netto', 'Gewinn', 'Einkaufsdatum', 'Händler', 'Notiz']];
+  live(S.sales).sort((a, b) => (a.date || '').localeCompare(b.date || '')).forEach(s => { const i = S.items.find(x => x.id === s.itemId) || {}; rows.push([dDE(s.date), i.sku, i.name, i.size, s.platform, deNum(s.price), yn(s.vat), deNum(saleNet(s)), deNum(s.fees), deNum(s.ship), deNum(i.id ? buyNet(i) : s.buyNet), deNum(saleProfit(s)), dDE(i.buyDate), i.dealer, s.note]); });
+  dl(`verkaeufe-${today()}.csv`, csvOut(rows), 'text/csv');
+};
+ACT.expReturns = () => {
+  const rows = [['Retourdatum', 'SKU', 'Produktname', 'Größe EU', 'Händler', 'Bestellnummer', 'Lieferdatum', 'Einkaufspreis', 'Erstattet', 'Erstattungsbetrag', 'Erstattungsdatum']];
+  live(S.items).filter(i => i.status === 'returned').forEach(i => rows.push([dDE(i.ret && i.ret.date), i.sku, i.name, i.size, i.dealer, i.orderNo, dDE(i.deliveryDate), deNum(i.buyPrice), yn(i.ret && i.ret.refundDone), i.ret && i.ret.refundDone ? deNum(i.ret.refundAmt) : '', dDE(i.ret && i.ret.refundDate)]));
+  dl(`retouren-${today()}.csv`, csvOut(rows), 'text/csv');
+};
+ACT.csvImport = () => { const f = $('#fCsv'); f.value = ''; f.click(); };
+let _csv = null;
+async function handleCsvFile(file) {
+  const rows = csvIn(await file.text());
+  if (rows.length < 2) { toast('CSV enthält keine Datenzeilen.', 'bad'); return; }
+  const head = rows[0].map(h => String(h).trim()), used = new Set();
+  const map = head.map(h => { const nk = normKey(h); const t = Object.keys(ITEM_ALIAS).find(t => t !== 'id' && !used.has(t) && ITEM_ALIAS[t].includes(nk)); if (t) used.add(t); return t || ''; });
+  _csv = { head, rows: rows.slice(1) };
+  const opts = sel => `<option value="">– ignorieren –</option>${Object.keys(FIELD_LABEL).map(k => `<option value="${k}" ${sel === k ? 'selected' : ''}>${FIELD_LABEL[k]}</option>`).join('')}`;
+  sheet({ title: 'CSV importieren', data: { csv: '1' }, body: `<p class="note" style="margin-top:0">${_csv.rows.length} Zeilen erkannt. Bitte die Zuordnung der Spalten prüfen.</p>
+    <table class="map">${head.map((h, i) => `<tr><td><b>${esc(h)}</b><div class="note">${esc(String(_csv.rows[0][i] ?? '').slice(0, 40))}</div></td><td><select data-col="${i}">${opts(map[i])}</select></td></tr>`).join('')}</table>
+    <div class="form" style="margin-top:12px">${fld('defLoc', 'Lagerort, falls in der Zeile keiner steht', '', { chips: S.lists.locations })}</div>`,
+    foot: `<button class="btn ghost" data-act="closeSheet">Abbrechen</button><button class="btn pri" data-act="csvDo">Importieren</button>` });
+}
+ACT.csvDo = el => {
+  const sh = el.closest('.sheet'); if (!_csv) return;
+  const cols = $$('[data-col]', sh).map(s => s.value), defLoc = ($('[data-f="defLoc"]', sh).value || '').trim();
+  if (!cols.includes('sku')) { toast('Bitte mindestens die SKU-Spalte zuordnen.', 'bad'); return; }
+  let n = 0, skipped = 0;
+  for (const r of _csv.rows) {
+    const o = {}; cols.forEach((t, i) => { if (t) o[ITEM_ALIAS[t][0]] = r[i]; });
+    const it = legacyItem(o, 'CSV-Import'); it.id = uid();
+    if (!it.sku) { skipped++; continue; }
+    if (!it.location) it.location = defLoc;
+    S.items.push(it); n++;
+    addToList('locations', it.location); addToList('dealers', it.dealer);
+  }
+  _csv = null; save('items'); closeSheet(sh); render();
+  info(`${n} Artikel importiert${skipped ? `, ${skipped} Zeilen ohne SKU übersprungen` : ''}.`);
+};
+
+/* ---- Sync zwischen Geräten (über die Zwischenstation) ---- */
+function mergeById(a, b) {
+  const m = new Map(a.map(x => [x.id, x]));
+  for (const y of b || []) { const x = m.get(y.id); if (!x || String(y.updatedAt || '') > String(x.updatedAt || '')) m.set(y.id, y); }
+  return [...m.values()];
+}
+function mergeRemote(d) {
+  if (!d) return;
+  S.items = mergeById(S.items, d.items).sort((a, b) => String(b.createdAt || '').localeCompare(String(a.createdAt || '')));
+  S.sales = mergeById(S.sales, d.sales).sort((a, b) => String(b.createdAt || '').localeCompare(String(a.createdAt || '')));
+  for (const [k, c] of Object.entries(d.catalog || {})) if (!S.catalog[k] || String(c.at || '') > String(S.catalog[k].at || '')) S.catalog[k] = c;
+  for (const k of Object.keys(d.lists || {})) (d.lists[k] || []).forEach(v => { const l = S.lists[k] || (S.lists[k] = []); if (!l.some(x => x.toLowerCase() === String(v).toLowerCase())) l.push(v); });
+  const cut = new Date(Date.now() - 90 * 864e5).toISOString();
+  S.items = S.items.filter(x => !(x._del && String(x.updatedAt) < cut)); S.sales = S.sales.filter(x => !(x._del && String(x.updatedAt) < cut));
+}
+const syncData = () => ({ items: S.items, sales: S.sales, catalog: S.catalog, lists: S.lists });
+let _syncT = 0, _syncBusy = false, _syncAgain = false;
+function scheduleSync(ms = 20000) { if (!S.settings.sync || !workerOn()) return; clearTimeout(_syncT); _syncT = setTimeout(() => syncNow(false), ms); }
+function syncUI(state) { const b = $('#syncBtn'); if (!b) return; b.classList.toggle('hide', !(S.settings.sync && workerOn())); b.classList.toggle('busy', state === 'busy'); b.classList.toggle('err', state === 'err'); }
+async function syncNow(manual) {
+  if (!S.settings.sync || !workerOn()) { if (manual) toast('Sync ist nicht eingerichtet.'); return; }
+  if (_syncBusy) { _syncAgain = true; return; }
+  _syncBusy = true; syncUI('busy');
+  const call = (opt = {}) => fetchT(workerBase() + '/sync', { ...opt, headers: { authorization: 'Bearer ' + S.settings.token, 'content-type': 'application/json', ...(opt.headers || {}) } }, 30000);
+  try {
+    await flush();
+    let r = await call();
+    if (r.status === 401) throw new AppErr('App-Passwort wird abgelehnt.');
+    if (r.status === 501) throw new AppErr('Sync braucht den KV-Speicher an der Zwischenstation (siehe Anleitung).');
+    let remote = r.ok ? await r.json() : null, rev = (remote && remote.rev) || '';
+    const before = JSON.stringify(syncData());
+    for (let i = 0; i < 3; i++) {
+      if (remote && remote.data) mergeRemote(remote.data);
+      const mine = JSON.stringify(syncData());
+      if (remote && remote.data && mine === JSON.stringify(remote.data)) break;
+      const p = await call({ method: 'PUT', headers: { 'if-match': rev }, body: JSON.stringify({ data: syncData() }) });
+      if (p.status === 409) { remote = await p.json(); rev = remote.rev || ''; continue; }
+      if (!p.ok) throw new AppErr('Sync-Fehler ' + p.status);
+      break;
+    }
+    if (JSON.stringify(syncData()) !== before) { _dirty.add('items'); _dirty.add('sales'); _dirty.add('catalog'); _dirty.add('lists'); await flush(); if (!$('#sheets').children.length) render(); }
+    S.meta.lastSync = nowISO(); _dirty.add('meta'); flush(); syncUI('ok');
+    if (manual) toast('Synchronisiert', 'ok');
+  } catch (e) { syncUI('err'); if (manual) toast('Sync: ' + errMsg(e), 'bad'); }
+  finally { _syncBusy = false; if (_syncAgain) { _syncAgain = false; scheduleSync(3000); } }
+}
+ACT.syncNow = () => syncNow(true);
+
+/* ---- 10-main.js ---- */
+/* ================= Einstellungen ================= */
+VIEWS.settings = () => {
+  const s = S.settings, n = live(S.items).length;
+  const txt = (k, label, o = {}) => `<div class="fld ${o.w || ''}"><label>${label}</label><input type="${o.type || 'text'}" data-set="${k}" value="${esc(s[k] ?? '')}" placeholder="${esc(o.ph || '')}" autocomplete="off" autocapitalize="off" spellcheck="false" ${o.numk ? 'inputmode="numeric"' : ''}></div>`;
+  const chk = (k, label, note) => `<label class="chk" style="align-items:flex-start;margin:8px 0"><input type="checkbox" data-set="${k}" ${s[k] ? 'checked' : ''}><span>${label}${note ? `<br><span class="note">${note}</span>` : ''}</span></label>`;
+  return `
+  <h2 style="margin-top:4px">KI-Zugang (liest die Labels)</h2>
+  <div class="card">
+    ${chk('aiViaWorker', 'KI über die Zwischenstation leiten', 'Der Anthropic-Key liegt dann nur im Worker, nicht in diesem Browser.')}
+    <div class="form">
+      ${s.aiViaWorker ? '' : txt('aiKey', 'Anthropic-API-Key', { type: 'password', ph: 'sk-ant-…' })}
+      <div class="fld"><label>Modell</label><input type="text" data-set="aiModel" value="${esc(s.aiModel)}" list="mdl" autocomplete="off" autocapitalize="off" spellcheck="false"><datalist id="mdl">${(S.ui.models || MODEL_FALLBACKS).map(m => `<option value="${esc(m)}">`).join('')}</datalist></div>
+    </div>
+    <div class="row" style="margin-top:10px"><button class="btn sm dark" data-act="aiTest">Verbindung testen</button><button class="btn sm ghost" data-act="aiModels">Verfügbare Modelle laden</button></div>
+  </div>
+
+  <h2>StockX über die Zwischenstation</h2>
+  <div class="card">
+    <p class="note" style="margin-top:0">Die offizielle StockX-API lässt sich nicht direkt aus dem Browser aufrufen. Ein kleiner Cloudflare-Worker (Datei <b>worker.js</b>, Schritte in der Anleitung) übernimmt Anmeldung und Abfragen.</p>
+    <div class="form">${txt('worker', 'Adresse der Zwischenstation', { type: 'url', ph: 'https://sneaker-bruecke.deinname.workers.dev' })}${txt('token', 'App-Passwort (APP_TOKEN)', { type: 'password' })}</div>
+    ${chk('sxOn', 'SKU und Barcode gegen StockX prüfen')}
+    ${chk('sync', 'Daten zwischen Geräten abgleichen', 'iPhone und Mac sehen denselben Bestand; zugleich ein Schutz gegen Datenverlust im Browser.')}
+    <div class="row" style="margin-top:6px"><button class="btn sm dark" data-act="workerTest">Verbindung testen</button>
+      <form method="post" target="_blank" action="${esc(workerBase())}/auth/start" style="display:inline" data-sxform><input type="hidden" name="t" value="${esc(s.token)}"><button class="btn sm" ${workerOn() ? '' : 'disabled'}>Mit StockX verbinden</button></form>
+      ${s.sync && workerOn() ? '<button class="btn sm ghost" data-act="syncNow">Jetzt abgleichen</button>' : ''}</div>
+    <div id="workerState" class="note" style="margin-top:8px">${S.meta.lastSync ? 'Letzter Abgleich: ' + new Date(S.meta.lastSync).toLocaleString('de-DE') : ''}</div>
+  </div>
+
+  <h2>Erfassung</h2>
+  <div class="card">
+    ${chk('doubleRead', 'Zweite Lesung, wenn kein Katalog die SKU belegt', 'Zwei unabhängige KI-Lesungen müssen übereinstimmen. Kostet einen zusätzlichen Aufruf.')}
+    ${chk('webLookup', 'Websuche als Ersatz, wenn StockX nichts liefert', 'Langsamer und teurer als die StockX-Abfrage; erreicht höchstens „Plausibel“.')}
+    ${chk('keepPhoto', 'Label-Foto verkleinert am Artikel behalten')}
+    <div class="form" style="margin-top:8px">${txt('vat', 'MwSt-Satz in %', { w: 'h', numk: 1 })}${txt('retDays', 'Rückgabefrist in Tagen', { w: 'h', numk: 1 })}${txt('retGrace', 'Frist-Nachlauf in Tagen', { w: 'h', numk: 1 })}${txt('refundDelay', 'Erstattung prüfen nach Tagen', { w: 'h', numk: 1 })}</div>
+  </div>
+
+  <h2>Auswahllisten</h2>
+  <div class="card"><div class="form">
+    ${['locations', 'dealers', 'platforms'].map(k => `<div class="fld"><label>${{ locations: 'Lagerorte', dealers: 'Händler', platforms: 'Käufer / Plattformen' }[k]} (mit Komma getrennt)</label><input type="text" data-list="${k}" value="${esc((S.lists[k] || []).join(', '))}" autocomplete="off"></div>`).join('')}
+  </div></div>
+
+  <h2>Daten</h2>
+  <div class="card">
+    <div class="note" style="margin-bottom:10px">${n} Artikel · ${live(S.sales).length} Verkäufe · ${Object.keys(S.catalog).length} bestätigte SKUs im eigenen Katalog${S.meta.lastBackup ? ' · letztes Backup ' + dDE(S.meta.lastBackup) : ''}${DB.db ? '' : ' · <b>Achtung: Browser erlaubt nur flüchtigen Speicher (privater Modus?)</b>'}</div>
+    <div class="row">
+      <button class="btn sm dark" data-act="backupExport">Backup sichern</button><button class="btn sm" data-act="backupImport">Backup einspielen</button>
+      <button class="btn sm" data-act="expInventory">Bestand als CSV</button><button class="btn sm" data-act="expSales">Verkäufe als CSV</button><button class="btn sm" data-act="csvImport">CSV importieren</button>
+      ${legacyRead() ? '<button class="btn sm" data-act="legacyImport">Altdaten der bisherigen App übernehmen</button>' : ''}
+      <button class="btn sm bad" data-act="wipe">Alles löschen</button>
+    </div>
+  </div>
+  <p class="note" style="text-align:center">Sneaker Warehouse ${APP_VERSION} · Daten liegen in diesem Browser${s.sync && workerOn() ? ' und in deiner Zwischenstation' : ''}</p>`;
+};
+function setSetting(el) {
+  const k = el.dataset.set; let v = el.type === 'checkbox' ? el.checked : el.value.trim();
+  if (['vat', 'retDays', 'retGrace', 'refundDelay'].includes(k)) v = num(v);
+  if (k === 'worker' && v && !/^https?:\/\//i.test(v)) v = 'https://' + v;
+  S.settings[k] = v; save('settings');
+  if (el.type === 'checkbox' || k === 'worker' || k === 'token') { if (el.type === 'checkbox') render(); else { const f = $('[data-sxform]'); if (f) { f.action = workerBase() + '/auth/start'; f.t.value = S.settings.token; $('button', f).disabled = !workerOn(); } } syncUI(); }
+}
+ACT.aiTest = async el => {
+  el.disabled = true;
+  try { const r = await AI.call({ max_tokens: 20, messages: [{ role: 'user', content: 'Antworte nur mit: OK' }] }); toast('KI erreichbar · Modell ' + (r.model || S.settings.aiModel), 'ok'); render(); }
+  catch (e) { toast(errMsg(e), 'bad', 6000); el.disabled = false; }
+};
+ACT.aiModels = async () => {
+  try {
+    const s = S.settings; let r;
+    if (s.aiViaWorker) r = await fetchT(workerBase() + '/ai/models', { headers: { authorization: 'Bearer ' + s.token } });
+    else r = await fetchT('https://api.anthropic.com/v1/models?limit=100', { headers: { 'x-api-key': s.aiKey, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' } });
+    if (!r.ok) throw new AppErr('Modelle konnten nicht geladen werden (' + r.status + ').');
+    const j = await r.json(); S.ui.models = (j.data || []).map(m => m.id).filter(Boolean);
+    render(); toast(S.ui.models.length + ' Modelle geladen – im Feld „Modell“ auswählbar', 'ok');
+  } catch (e) { toast(errMsg(e), 'bad'); }
+};
+ACT.workerTest = async () => {
+  const box = $('#workerState');
+  if (!workerOn()) { toast('Bitte Adresse und App-Passwort eintragen.', 'bad'); return; }
+  box.textContent = 'Prüfe …';
+  try {
+    const r = await fetchT(workerBase() + '/health', { headers: { authorization: 'Bearer ' + S.settings.token } }, 15000);
+    if (r.status === 401) throw new AppErr('App-Passwort wird abgelehnt.');
+    if (!r.ok) throw new AppErr('Antwort ' + r.status + ' – stimmt die Adresse?');
+    const h = await r.json(), y = b => b ? '✓' : '✗';
+    box.innerHTML = `Zwischenstation erreichbar · StockX-Zugangsdaten ${y(h.stockxConfigured)} · StockX verbunden ${y(h.stockxConnected)} · KI-Key ${y(h.ai)} · Speicher für Sync ${y(h.kv)}` + (h.stockxConfigured && !h.stockxConnected ? '<br><b>Nächster Schritt:</b> „Mit StockX verbinden“ antippen und dort anmelden.' : '');
+  } catch (e) { box.textContent = errMsg(e); }
+};
+ACT.wipe = async () => {
+  if (!(await ask('Wirklich ALLE Artikel, Verkäufe und Einstellungen in diesem Browser löschen? Vorher ein Backup sichern!', { ok: 'Alles löschen', danger: true }))) return;
+  if (!(await ask('Letzte Rückfrage: Das lässt sich nicht rückgängig machen.', { ok: 'Endgültig löschen', danger: true }))) return;
+  for (const k of PERSIST) await DB.del('kv', k);
+  location.reload();
+};
+
+/* ================= Rahmen ================= */
+function render() {
+  const v = S.ui.view;
+  $('#view').innerHTML = (VIEWS[v] || VIEWS.capture)();
+  $$('#tabs button').forEach(b => b.classList.toggle('on', b.dataset.view === v));
+  if (AFTER[v]) AFTER[v]();
+  updateDots(); syncUI();
+}
+function go(view) { S.ui.view = view; render(); window.scrollTo(0, 0); }
+ACT.nav = el => go(el.dataset.view);
+
+document.addEventListener('click', e => {
+  const el = e.target.closest('[data-act]'); if (!el || el.disabled) return;
+  const f = ACT[el.dataset.act]; if (!f) return;
+  if (el.tagName !== 'A') e.preventDefault();
+  try { const p = f(el, e); if (p && p.catch) p.catch(err => { console.error(err); toast(errMsg(err), 'bad'); }); } catch (err) { console.error(err); toast(errMsg(err), 'bad'); }
+});
+function onField(e) {
+  const el = e.target;
+  if (el.dataset.inp && INP[el.dataset.inp]) return INP[el.dataset.inp](el);
+  if (el.closest('[data-batch]')) return INP.batch();
+  if (el.closest('[data-sale]')) return INP.sale();
+  if (el.closest('.sheet[data-draft]')) return INP.draft(el);
+}
+document.addEventListener('input', onField);
+document.addEventListener('change', e => {
+  const el = e.target;
+  if (el.type === 'file') return onFile(el);
+  if (el.dataset.chg && CHG[el.dataset.chg]) return CHG[el.dataset.chg](el);
+  if (el.dataset.set) return setSetting(el);
+  if (el.dataset.list) { S.lists[el.dataset.list] = [...new Set(el.value.split(',').map(x => x.trim()).filter(Boolean))]; save('lists'); return; }
+  if (el.type === 'checkbox' || el.type === 'date' || el.tagName === 'SELECT') onField(e);
+});
+document.addEventListener('toggle', e => { if (e.target.id === 'batchBox') S.ui.batchOpen = e.target.open; }, true);
+function onFile(el) {
+  const files = [...el.files]; el.value = ''; if (!files.length) return;
+  if (el.id === 'fCam' || el.id === 'fGal') addPhotos(files, 'label');
+  else if (el.id === 'fShoe') addPhotos(files.slice(0, 1), 'shoe');
+  else if (el.id === 'fJson') handleJsonFile(files[0]);
+  else if (el.id === 'fCsv') handleCsvFile(files[0]);
+}
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'hidden') flush();
+  else if (S.settings.sync && workerOn() && (!S.meta.lastSync || Date.now() - new Date(S.meta.lastSync) > 60000)) syncNow(false);
+});
+window.addEventListener('pagehide', () => flush());
+window.addEventListener('error', e => console.error('Fehler:', e.message));
+
+async function init() {
+  await loadState();
+  /* Unterbrochene Erfassungen wieder anstoßen */
+  S.drafts.forEach(d => { if (['queued', 'reading', 'resolving'].includes(d.st)) { d.st = 'queued'; WORK.queue.push(d.id); } });
+  render(); pump();
+  const due = live(S.items).map(it => ({ it, left: retLeft(it) })).filter(x => x.left != null && x.left <= 3).sort((a, b) => a.left - b.left);
+  if (due.length && S.meta.retPopup !== today()) {
+    S.meta.retPopup = today(); save('meta');
+    info(`<b>Rückgabefrist läuft ab:</b><br>` + due.slice(0, 8).map(x => `${esc(x.it.name || x.it.sku)} (EU ${esc(x.it.size)}) – ${x.left > 0 ? 'noch ' + x.left + ' Tag(e)' : x.left === 0 ? 'heute' : 'abgelaufen'}`).join('<br>'), true);
+  }
+  if (S.settings.sync && workerOn()) syncNow(false);
+}
+init().catch(e => { console.error(e); document.getElementById('view').innerHTML = '<div class="banner bad">Start fehlgeschlagen: ' + esc(e.message) + '</div>'; });
+</script>
+</body>
+</html>
